@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block title %}Вступление в сообщество{% endblock title %}
+{% block content %}
+  <h1>Сообщества созданы для того чтобы в них вступали, {{ user.username }}!</h1>
+  <ul>
+  {% for community in communities %}
+    <li>
+      <h3>{{ community.name }}</h3>
+      <p>{{ community.description }}</p>
+    </li>
+  {% empty %}
+    </li>Сообществ нет, их еще предстоит <a href="{% url new_community %}">создать</a></li>
+  {% endfor %}
+  </ul>
+{% endblock content %}
+{% block sidebar %}{% endblock sidebar %}
+

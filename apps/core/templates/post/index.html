@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block title %}Socio!{% endblock title %}
+{% block content %}
+<ul class="posts no-list-style">
+{% for post in posts %}
+  <li class="post">
+    <h4>
+      <a href="{% url blog community_id=post.blogs.latest.communities.latest.id,id=post.blogs.latest.id %}">
+        {{ post.blogs.latest.name }}
+      </a>
+      &nbsp;&rarr;
+      <a href="{% url post community_id=post.blogs.latest.communities.latest.id,blog_id=post.blogs.latest.id,id=post.id %}">
+        {{ post.name }}
+      </a>
+    </h4>
+    <span class="info">Пишет {{ post.author.username }}, {{ post.created_at|date:"d.m.Y" }} в {{ post.created_at|date:"H:i" }}</span>
+    <div class="content">{{ post.content }}</div>
+  </li>
+{% empty %}
+  <li>
+    <div class="message error">Мы вынуждены сообщить вам о том, что здесь никто еще ничего не писал. И да, это шанс для вас стать первым среди равных!</div>
+  </li>
+{% endfor %}
+</ul>
+{% endblock content %}
+

@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block title %}{{ blog.name }}{% endblock title %}
+{% block content %}
+<h1><a href="{% url community id=community.id %}">{{ community.name }}</a>&nbsp;&rarr; {{ blog.name }}</h1>
+<ul class="posts no-list-style">
+  {% for post in blog.posts.all %}
+    <li class="post">
+      <h4><a href="{% url post community_id=community.id,blog_id=blog.id,id=post.id %}">{{ post.name }}</a></h4>
+      <span class="info">Пишет {{ post.author.username }}, {{ post.created_at|date:"d.m.Y" }} в {{ post.created_at|date:"H:i" }}</span>
+      <div class="content">{{ post.content }}</div>
+    </li>
+  {% empty %}
+    <li>Беда-беда, ни одной записи в этом блоге. Срочно <a href="{% url new_post community_id=community.id,blog_id=blog.id %}">исправьте это недоразумение</a>!</li>
+  {% endfor %}
+</ul>
+{% endblock content %}
+{% block sidebar %}
+<ul class="no-list-style">
+  <li><a href="#">Написать в блог</a></li>
+</ul>
+{% endblock sidebar %}
+

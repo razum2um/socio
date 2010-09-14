@@ -1,0 +1,6 @@
+Django==1.2.2
+PIL==1.1.7
+South==0.7.2
+-e git://github.com/brosner/django-mptt.git@3bc778306edc089838f7e8868fbf187cc88af434#egg=django_mptt-0.3_pre-py2.6-dev
+sorl-thumbnail==3.2.5
+textile==2.1.4

@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% load helpers %}
+{% block title %}Новый блог в сообществе{% endblock title %}
+{% block content %}
+<h1>{{ community.name }}&nbsp;&rarr; Новый блог</h1>
+  <form method="POST" action="{% url new_blog community_id=community.id %}" class="bp">
+    {% csrf_token %}
+    <p {% if blog_form.name.errors %}class="error"{% endif %}>
+      {{ blog_form.name.label_tag }}
+      {{ blog_form.name }}
+    </p>
+    <p {% if blog_form.description.errors %}class="error"{% endif %}>
+      {{ blog_form.description.label_tag }}
+      {{ blog_form.description }}
+    </p>
+    <p>{% submit_tag 'создать' %}</p>
+  </form>
+{% endblock content %}
+
+{% block sidebar %}
+{% endblock sidebar %}
+

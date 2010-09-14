@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+{% load community_tags %}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta name="title" content="{% if current_page %}{{ current_page.title }}{% endif %}" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <title>
+      {% block title %}
+        {% if current_page %}
+          {{ current_page.title }}
+        {% endif %}
+      {% endblock %} | {{ SITE.name }}
+    </title>
+    <link type="image/ico" rel="shortcut icon" href="{{ IMG_URL }}favicon.png" />
+    <link href="{{ CSS_URL }}screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+    <link href="{{ CSS_URL }}print.css" media="print" rel="stylesheet" type="text/css" />
+    <!--[if IE 7]>
+      <link href="{{ CSS_URL }}ie7.css" media="screen, projection" rel="stylesheet" type="text/css" />
+    <![endif]-->
+    <!--[if IE 6]>
+      <link href="{{ CSS_URL }}ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+      <script type="text/javascript" src="{{ JS_URL }}lib/IE7.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="{{ JS_URL }}lib/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="{{ JS_URL }}lib/swfobject.js"></script>
+  </head>
+  <body class="bp two-col">
+    <div id="container">
+      <div id="header">
+        {% block header %}
+          <ul class="navigation">
+            <li>
+              <a href="{% url index %}">Заглавная</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li>
+              Здравствуйте, {{ user }}. Хотите <a href="{% url sign_out %}">покинуть</a> нас?
+            </li>
+            {% endif %}
+          </ul>
+          {% if messages %}
+          <ul class="messages">
+              {% for message in messages %}
+              <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|safe }}</li>
+              {% endfor %}
+          </ul>
+          {% endif %}
+        {% endblock header%}
+      </div>
+      <div id="content">
+        {% block content %}<h1>Тут должно быть содержимое страницы!</h1>{% endblock content %}
+      </div>
+      <div id="sidebar">
+        {% block sidebar %}
+          {% if user.is_authenticated %}
+            <h4>Мои сообщества:</h4>
+            {% communities_side_list %}
+          {% else %}
+            <p><a href="{% url sign_in %}">Представиться</a></p>
+          {% endif %}
+        {% endblock sidebar %}
+      </div>
+      <div id="footer">
+        {% block footer%}{% endblock %}
+      </div>
+    </div>
+  </body>
+</html>
+

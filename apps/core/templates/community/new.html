@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% load helpers %}
+{% block title %}Новое сообщество{% endblock title %}
+{% block content %}
+  <h1>Новое сообщество</h1>
+  <form method="POST" action="{% url new_community %}" class="bp">
+    {% csrf_token %}
+    <p {% if community_form.name.errors %}class="error"{% endif %}>
+      {{ community_form.name.label_tag }}
+      {{ community_form.name }}
+    </p>
+    <p {% if community_form.description.errors %}class="error"{% endif %}>
+      {{ community_form.description.label_tag }}
+      {{ community_form.description }}
+    </p>
+    <p>{% submit_tag 'создать' %}</p>
+  </form>
+{% endblock content %}
+{% block sidebar %}{% endblock sidebar %}
+

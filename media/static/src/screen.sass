@@ -1,0 +1,128 @@
+@import blueprint/reset
+@import blueprint
+@import blueprint/buttons
+@import blueprint/scaffolding
+@import partials/base
+
+@import "compass/utilities/lists"
+
+$header-color: #006699
+
+// To generate css equivalent to the blueprint css but with your
+// configuration applied, uncomment:
+// @include blueprint
+
+// But Compass recommends that you scope your blueprint styles
+// So that you can better control what pages use blueprint
+// when stylesheets are concatenated together.
++blueprint-scaffolding("body.bp")
+body.bp
+  +blueprint-typography(true)
+  +blueprint-utilities
+  +blueprint-debug
+  +blueprint-interaction
+  // Remove the scaffolding when you're ready to start doing visual design.
+  // Or leave it in if you're happy with how blueprint looks out-of-the-box
+form.bp
+  +blueprint-form-layout
+  +blueprint-form-borders
+  +blueprint-form-sizes(390px, 390px, 250px)
+
+  label
+    display: block
+
+  .submit
+    +button-button
+
+// Page layout can be done using mixins applied to your semantic classes and IDs:
+body.two-col
+  #container
+    +container
+  #header, #footer
+    +column($blueprint-grid-columns)
+
+  #header
+    ul.navigation
+      +horizontal-list-container
+      > li
+        +horizontal-list-item
+    .messages
+      .info
+        color: #312973
+        border: 2px solid #3426AD
+        background: #A399FF
+        padding: 0.8em
+        margin-bottom: 1em
+      .warning
+        color: #6B6814
+        border: 2px solid #E6DF25
+        background: #FFFCA8
+        padding: 0.8em
+        margin-bottom: 1em
+
+  h1
+    color: $header-color
+    font-size: 24px
+    margin: 10px 0 10px 0
+    a
+      color: $header-color
+      &:visited
+        color: $header-color
+
+  h2
+    color: $header-color
+    font-size: 20px
+    margin: 10px 0 10px 0
+    a
+      color: $header-color
+      &:visited
+        color: $header-color
+
+  ul.no-list-style
+    list-style-type: none
+    margin: 10px 0 0
+    padding: 0
+
+  .level-1
+    margin-left: 20px !important
+
+  #content
+    // Two thirds of the grid columns, rounding up.
+    // With 24 cols, this is 16.
+    $content-columns: ceil(3 * $blueprint-grid-columns / 4)
+    // true means it's the last column in the row
+    +column($content-columns)
+
+    .description
+      color: #999999
+      font-size: 12px
+
+    .message
+      margin-top: 100px
+
+
+    .post
+
+      h4
+        color: #003366
+        margin-bottom: 5px
+
+      .info
+        color: #CCCCCC
+        font:
+          size: 12px
+          style: italic
+
+      .content
+        margin-top: 5px
+        font:
+          family: Georgia, serif
+          size: 14px
+
+    .highlight
+      background: #F9FADE
+  #sidebar
+    // One third of the grid columns, rounding down. With 24 cols, this is 8.
+    $sidebar-columns: floor($blueprint-grid-columns / 4)
+    +column($sidebar-columns, true)
+

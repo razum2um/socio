@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block title %}Вход на сайт{% endblock %}
+{% block content %}
+  <h1>Вход на сайт</h1>
+  <p><a href="{% url sign_up %}">регистрация</a></p>
+  <form method="post" action="{% url sign_in %}">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <p><input type="submit" value="войти"/> | <a href="{% url password_reset %}">забыли пароль?</a> </p>
+  </form>
+{% endblock content %}
+

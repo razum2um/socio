@@ -1,5 +1,22 @@
 #!/usr/bin/env python
 from django.core.management import execute_manager
+import os
+import sys
+
+
+def rel(*x):
+    return os.path.join(os.path.abspath(os.path.dirname(__file__)), *x)
+
+
+paths = ('apps','contrib')
+
+for path in paths:
+    path = rel(path)
+    if path not in sys.path:
+        sys.path.append(path)
+
+
+
 try:
     import settings # Assumed to be in the same directory.
 except ImportError:
@@ -9,3 +26,4 @@ except ImportError:
 
 if __name__ == "__main__":
     execute_manager(settings)
+

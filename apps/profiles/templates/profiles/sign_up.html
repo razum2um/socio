@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block title %}Регистрация{% endblock %}
+{% block content %}
+<h1>Регистрация</h1>
+<form method="POST" action="{% url sign_up %}">
+  {% csrf_token %}
+  {{ sign_up_form.as_p }}
+  <p><input type="submit" value="Регистрировать!"></p>
+</form>
+{% endblock content %}
+
+{% comment %}
+asdsd
+{% endcomment %}
+

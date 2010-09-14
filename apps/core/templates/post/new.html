@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% load helpers %}
+{% block title %}Новая запись{% endblock title %}
+{% block content %}
+  <h1>{{ blog.name }}&nbsp;&rarr; Новая запись</h1>
+  <form method="POST" action="{% url new_post community_id=community.id,blog_id=blog.id %}" class="bp">
+    {% csrf_token %}
+    <p {% if post_form.name.errors %}class="error"{% endif %}>
+      {{ post_form.name.label_tag }}
+      {{ post_form.name }}
+    </p>
+    <p {% if post_form.content.errors %}class="error"{% endif %}>
+      {{ post_form.content.label_tag }}
+      {{ post_form.content }}
+    </p>
+    <p>{% submit_tag 'создать' %}</p>
+  </form>
+{% endblock content %}
+{% block sidebar %}{% endblock sidebar %}
+

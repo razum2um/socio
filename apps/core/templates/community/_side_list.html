@@ -1,0 +1,18 @@
+<ul class="no-list-style">
+  {% for community in communities %}
+  <li>
+    <a href="{% url community id=community.id %}">{{ community.name }}</a>
+    <ul class="no-list-style level-1">
+    {% for blog in community.blogs.all %}
+      <li><a href="{% url blog community_id=community.id,id=blog.id %}">{{ blog.name }}</a></li>
+    {% empty %}
+      <li>в этом сообществе пока еще нет блогов</li>
+    {% endfor %}
+    </ul>
+  </li>
+  {% empty %}
+  <li>Вы еще не вступили ни в одно из сообществ.</li>
+  <li>Хотите <a href="{% url join_community %}">вступить</a>?</li>
+  {% endfor %}
+</ul>
+
