@@ -13,7 +13,11 @@
 {% endblock content %}
 {% block sidebar %}
 <ul class="no-list-style">
-  <li><a href="#">Написать в блог</a></li>
+  {% if user.is_authenticated %}
+  <li><a href="{% url new_post community_id=community.id,blog_id=blog.id %}">Написать в блог</a></li>
+  {% else %}
+  <li><a href="{% url sign_in %}">Представиться</a></li>
+  {% endif %}
 </ul>
 {% endblock sidebar %}
 
