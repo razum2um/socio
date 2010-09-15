@@ -1,0 +1,4 @@
+# set SMTP hostname here
+EMAIL_HOST = None
+DEBUG = False
+

@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 from manage import rel
 
+try:
+    from local_settings import *
+except ImportError:
+    pass
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -70,7 +75,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "openteam.context_processors.static",
 )
 
-ROOT_URLCONF = 'socio.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
     rel('templates')
@@ -92,14 +97,8 @@ INSTALLED_APPS = (
     'profiles',
 )
 
-
-if DEBUG:
-    CACHE_BACKEND = 'dummy://'
-    CACHE_MIDDLEWARE_SECONDS = 0
-else:
-    CACHE_BACKEND = 'locmem://'
-    CACHE_MIDDLEWARE_SECONDS = 3600
-
+CACHE_BACKEND = 'dummy://'
+CACHE_MIDDLEWARE_SECONDS = 0
 
 AUTH_PROFILE_MODULE = 'profiles.UserProfile'
 LOGIN_URL = '/profiles/signin/'

@@ -16,5 +16,13 @@
   {% endfor %}
 </ul>
 {% endblock content %}
-{% block sidebar %}{% endblock sidebar%}
+{% block sidebar %}
+<ul class="no-list-style">
+  {% if user.is_authenticated %}
+  <li><a href="{% url new_blog community_id=community.id %}">Создать блог?</a></li>
+  {% else %}
+  <li><a href="{% url sign_in %}">Представиться</a></li>
+  {% endif %}
+</ul>
+{% endblock sidebar%}
 
