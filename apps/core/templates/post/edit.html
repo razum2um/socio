@@ -2,7 +2,7 @@
 {% load helpers %}
 {% block title %}Новая запись{% endblock title %}
 {% block content %}
-  <h2>{{ post.blog.name }}&nbsp;&rarr; {{ post.name }}</h2>
+  <h2><a href="{% url blog id=post.blog.id %}">{{ post.blog.name }}</a>&nbsp;&rarr; <a href="{% url post id=post.id %}">{{ post.name }}</a></h2>
     {% url edit_post id=post.id as action %}
   {% include "post/_form.html" %}
 {% endblock content %}
