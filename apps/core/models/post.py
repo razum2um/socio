@@ -8,7 +8,7 @@ from blog import Blog
 
 class Post (NameModel, TimestampModel):
     author   = models.ForeignKey(User, verbose_name=u'автор')
-    blogs    = models.ManyToManyField(Blog, related_name='posts')
+    blog    = models.ForeignKey(Blog, related_name='posts')
     content  = models.TextField(u'текст')
     is_draft = models.BooleanField(u'черновик?', default=True)
 

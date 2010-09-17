@@ -2,7 +2,7 @@
 {% load helpers %}
 {% block title %}Новое сообщество{% endblock title %}
 {% block content %}
-  <h1>Новое сообщество</h1>
+  <h2>Новое сообщество</h2>
   <form method="POST" action="{% url new_community %}" class="bp">
     {% csrf_token %}
     <p {% if community_form.name.errors %}class="error"{% endif %}>

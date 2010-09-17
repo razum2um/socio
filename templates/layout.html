@@ -30,13 +30,26 @@
     <div id="container">
       <div id="header">
         {% block header %}
+          <h2>{{ SITE.name }}</h2>
           <ul class="navigation">
             <li>
               <a href="{% url index %}">Заглавная</a>
             </li>
+            <li>
+              <a href="{% url communities %}">Сообщества</a>
+            </li>
+            <li>
+              <a href="{% url blogs %}">Блоги</a>
+            </li>
+          </ul>
+          <ul class="actions">
             {% if user.is_authenticated %}
             <li>
               Здравствуйте, {{ user }}. Хотите <a href="{% url sign_out %}">покинуть</a> нас?
+            </li>
+            {% else %}
+            <li>
+              <a href="{% url sign_in %}">Представиться</a>
             </li>
             {% endif %}
           </ul>
@@ -58,7 +71,7 @@
             <h4>Мои сообщества:</h4>
             {% communities_side_list %}
           {% else %}
-            <p><a href="{% url sign_in %}">Представиться</a></p>
+
           {% endif %}
         {% endblock sidebar %}
       </div>

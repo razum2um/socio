@@ -1,12 +1,12 @@
 {% extends "layout.html" %}
 {% block title %}Сообщество {{ community.name }}{% endblock title %}
 {% block content %}
-<h1>{{ community.name }}</h1>
+<h2>{{ community.name }}</h2>
 <div class="description">{{ community.description }}</div>
 <ul class="blog-list no-list-style">
   {% for blog in community.blogs.all %}
   <li>
-    <h4><a href="{% url blog community_id=community.id,id=blog.id %}">{{ blog.name }}</a></h4>
+    <h4><a href="{% url blog id=blog.id %}">{{ blog.name }}</a></h4>
     <div class="description">{{ blog.description }}</div>
   </li>
   {% empty %}
@@ -20,8 +20,6 @@
 <ul class="no-list-style">
   {% if user.is_authenticated %}
   <li><a href="{% url new_blog community_id=community.id %}">Создать блог?</a></li>
-  {% else %}
-  <li><a href="{% url sign_in %}">Представиться</a></li>
   {% endif %}
 </ul>
 {% endblock sidebar%}

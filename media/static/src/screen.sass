@@ -42,10 +42,33 @@ body.two-col
     +column($blueprint-grid-columns)
 
   #header
-    ul.navigation
+    h2
+      font:
+        family: sans
+        size: 2em
+      color: #0099CC
+
+    ul.actions
       +horizontal-list-container
-      > li
+      font-size: 12px
+      padding:
+        left: 10px
+
+    ul.navigation
+      display: block
+      width: auto
+      +horizontal-list-container
+
+      li
+        background-color: #CCCCFF
+        border:
+          left: 6px solid #CCCCFF
+          right: 6px solid #CCCCFF
+        padding:
+          top: 3px
+          bottom: 3px
         +horizontal-list-item
+
     .messages
       .info
         color: #312973
@@ -93,6 +116,17 @@ body.two-col
     // true means it's the last column in the row
     +column($content-columns)
 
+    h3
+      margin:
+        top: 0.5em
+        bottom: 0.5em
+
+    ul
+      list-style-type: none
+      margin-top: 5px
+      overflow: hidden
+      padding: 0
+
     .description
       color: #999999
       font-size: 12px
@@ -122,6 +156,7 @@ body.two-col
 
     .highlight
       background: #F9FADE
+
   #sidebar
     // One third of the grid columns, rounding down. With 24 cols, this is 8.
     $sidebar-columns: floor($blueprint-grid-columns / 4)

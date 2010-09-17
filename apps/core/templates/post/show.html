@@ -1,10 +1,10 @@
 {% extends "layout.html" %}
 {% block title %}{{ post.name }}::{{ blog.name }}{% endblock title %}
 {% block content %}
-<h1>
-  <a href="{% url community id=community.id %}">{{ community.name }}</a>&nbsp;&rarr;
-  <a href="{% url blog community_id=community.id,id=blog.id%}">{{ blog.name }}</a>
-</h1>
+<h2>
+  <a href="{% url community id=post.blog.community.id %}">{{ post.blog.community.name }}</a>&nbsp;&rarr;
+  <a href="{% url blog id=post.blog.id %}">{{ post.blog.name }}</a>
+</h2>
 <div class="post">
   <h4>{{ post.name }}</h4>
   <span class="info">Пишет {{ post.author.username }}, {{ post.created_at|date:"d.m.Y" }} в {{ post.created_at|date:"H:i" }}</span>
@@ -14,9 +14,7 @@
 {% block sidebar %}
 <ul class="no-list-style">
   {% if user.is_authenticated %}
-  <li><a href="{% url new_post community_id=community.id,blog_id=blog.id %}">Написать в блог</a></li>
-  {% else %}
-  <li><a href="{% url sign_in %}">Представиться</a></li>
+  <li><a href="{% url new_post blog_id=post.blog.id %}">Написать в блог</a></li>
   {% endif %}
 </ul>
 {% endblock sidebar %}

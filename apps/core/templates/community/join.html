@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block title %}Вступление в сообщество{% endblock title %}
 {% block content %}
-  <h1>Сообщества созданы для того чтобы в них вступали, {{ user.username }}!</h1>
+  <h2>Сообщества созданы для того чтобы в них вступали, {{ user.username }}!</h2>
   <ul>
   {% for community in communities %}
     <li>

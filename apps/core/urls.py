@@ -9,6 +9,11 @@ urlpatterns = patterns('core.views',
     ),
 # ------------------------------------------------------------------------------
     url(
+        regex = '^communities/$',
+        view  = 'community.index',
+        name  = 'communities'
+    ),
+    url(
         regex = '^communities/join/$',
         view  = 'community.join',
         name  = 'join_community'
@@ -25,23 +30,28 @@ urlpatterns = patterns('core.views',
     ),
 # ------------------------------------------------------------------------------
     url(
+        regex = '^blogs/$',
+        view  = 'blog.index',
+        name  = 'blogs'
+    ),
+    url(
         regex = '^community-(?P<community_id>\d+)/blogs/new/$',
         view  = 'blog.new',
         name  = 'new_blog'
     ),
     url(
-        regex = '^community-(?P<community_id>\d+)/blog-(?P<id>\d+)/$',
+        regex = '^blog-(?P<id>\d+)/$',
         view  = 'blog.show',
         name  = 'blog'
     ),
 # ------------------------------------------------------------------------------
     url(
-        regex = '^community-(?P<community_id>\d+)/blog-(?P<blog_id>\d+)/posts/new/$',
+        regex = '^blog-(?P<blog_id>\d+)/posts/new/$',
         view  = 'post.new',
         name  = 'new_post'
     ),
     url(
-        regex = '^community-(?P<community_id>\d+)/blog-(?P<blog_id>\d+)/post-(?P<id>\d+)/$',
+        regex = '^post-(?P<id>\d+)/$',
         view  = 'post.show',
         name  = 'post'
     ),

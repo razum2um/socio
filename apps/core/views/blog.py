@@ -10,6 +10,15 @@ from openteam.shortcuts import redirect_to_view
 from core.models import Community, Blog
 from core.forms import BlogForm
 
+@render_to('blog/index.html')
+def index(request):
+    blogs = Blog.objects.all()
+
+    return {
+        'blogs': blogs,
+    }
+
+
 @login_required
 @render_to('blog/new.html')
 def new(request, community_id):
@@ -30,17 +39,10 @@ def new(request, community_id):
 
 
 @render_to('blog/show.html')
-def show(request, community_id, id):
-    community = get_object_or_404(Community, id=community_id)
+def show(request, id):
+    blog = get_object_or_404(Blog ,id=id)
 
-    try:
-        blog = community.blogs.get(id=id)
-
-        return {
-            'community': community,
-            'blog': blog,
-        }
-
-    except Blog.DoesNotExist:
-        raise Http404
+    return {
+        'blog': blog,
+    }
 

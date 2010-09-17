@@ -8,6 +8,14 @@ from core.forms import CommunityForm
 from core.models import Community
 
 
+@render_to('community/index.html')
+def index(request):
+    communities = Community.objects.allowed_read(request.user)
+    return {
+        'communities': communities,
+    }
+
+
 @login_required
 @render_to('community/join.html')
 def join(request):

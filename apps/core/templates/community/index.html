@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block title %}Наши разнообразные сообщества:{% endblock title %}
+{% block content %}
+  <ul>
+  {% for community in communities %}
+    <li>
+      <h3><a href="{% url community id=community.id %}">{{ community.name }}</a></h3>
+      <p>{{ community.description }}</p>
+    </li>
+  {% empty %}
+    </li>Сообществ нет, их еще предстоит <a href="{% url new_community %}">создать</a></li>
+  {% endfor %}
+  </ul>
+{% endblock content %}
+{% block sidebar %}{% endblock sidebar %}
+
