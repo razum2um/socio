@@ -2,7 +2,7 @@
 <span class="info">Пишет {{ post.author.username }}, {{ post.created_at|date:"d.m.Y" }} в {{ post.created_at|date:"H:i" }}</span>
 <div class="content serif">
   {% if full_text %}
-    {{ post.announce|textile }}
+    {% if post.announce %}{{ post.announce|textile }}{% endif %}
     {{ post.content|textile }}
   {% else %}
     {% if post.announce %}
