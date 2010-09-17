@@ -19,29 +19,29 @@ urlpatterns = patterns('core.views',
         name  = 'new_community'
     ),
     url(
-        regex = '^communities/(?P<id>\d+)/$',
+        regex = '^community-(?P<id>\d+)/$',
         view  = 'community.show',
         name  = 'community'
     ),
 # ------------------------------------------------------------------------------
     url(
-        regex = '^communities/(?P<community_id>\d+)/blogs/new/$',
+        regex = '^community-(?P<community_id>\d+)/blogs/new/$',
         view  = 'blog.new',
         name  = 'new_blog'
     ),
     url(
-        regex = '^communities/(?P<community_id>\d+)/blogs/(?P<id>\d+)/$',
+        regex = '^community-(?P<community_id>\d+)/blog-(?P<id>\d+)/$',
         view  = 'blog.show',
         name  = 'blog'
     ),
 # ------------------------------------------------------------------------------
     url(
-        regex = '^communities/(?P<community_id>\d+)/blogs/(?P<blog_id>\d+)/posts/new/$',
+        regex = '^community-(?P<community_id>\d+)/blog-(?P<blog_id>\d+)/posts/new/$',
         view  = 'post.new',
         name  = 'new_post'
     ),
     url(
-        regex = '^communities/(?P<community_id>\d+)/blogs/(?P<blog_id>\d+)/posts/(?P<id>\d+)/$',
+        regex = '^community-(?P<community_id>\d+)/blog-(?P<blog_id>\d+)/post-(?P<id>\d+)/$',
         view  = 'post.show',
         name  = 'post'
     ),
