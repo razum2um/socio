@@ -24,6 +24,7 @@ def new(request, blog_id):
         if post_form.is_valid():
             post = post_form.save(commit=False)
             post.author = request.user
+            post.blog = blog
             post.save()
             blog.posts.add(post)
 
