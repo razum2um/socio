@@ -7,11 +7,11 @@ urlpatterns = patterns('profiles.views',
 #        view  = 'index',
 #        name  = 'profiles_all',
 #    ),
-#    url(
-#        regex = r'^(?P<id>\d+)/$',
-#        view  = 'show',
-#        name  = 'profiles_show',
-#    ),
+    url(
+        regex = r'^(?P<id>\d+)/$',
+        view  = 'show',
+        name  = 'profile',
+    ),
     url(
         regex = r'^signup/$',
         view  = 'sign_up',

@@ -13,9 +13,7 @@
         {{ post.name }}
       </a>
     </h4>
-    <span class="info">Пишет {{ post.author.username }}, {{ post.created_at|date:"d.m.Y" }} в {{ post.created_at|date:"H:i" }}</span>
-    <div class="content">{{ post.content }}</div>
-  </li>
+    {% include "post/_content.html" %}  </li>
 {% empty %}
   <li>
     <div class="message error">Мы вынуждены сообщить вам о том, что здесь никто еще ничего не писал. И да, это шанс для вас стать первым среди равных!</div>

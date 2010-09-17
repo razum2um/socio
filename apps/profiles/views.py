@@ -3,6 +3,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
+
 
 from openteam.decorators import render_to
 from openteam.shortcuts import redirect_to_view
@@ -79,9 +81,12 @@ def sign_out(request):
 
     return redirect_to_view('index')
 
-#@render_to("profiles/show.html")
-#def show(request, id):
-#    return {}
+@render_to("profiles/show.html")
+def show(request, id):
+    user = get_object_or_404(User, id=id)
+    return {
+        'user': user,
+    }
 
 #@render_to("profiles/edit.html")
 #def edit(request, id):

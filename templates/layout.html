@@ -30,7 +30,8 @@
     <div id="container">
       <div id="header">
         {% block header %}
-          <h2>{{ SITE.name }}</h2>
+          <h2>{{ SITE.name }}<sup>{% if user.is_authenticated %}Вы &mdash; <a href="{% url profile id=user.id %}">{{ user }}</a>. <a href="{% url sign_out %}">Выйти</a>?{% else %}<a href="{% url sign_in %}">Представиться</a>{% endif %}
+</sup></h2>
           <ul class="navigation">
             <li>
               <a href="{% url index %}">Заглавная</a>
@@ -42,17 +43,6 @@
               <a href="{% url blogs %}">Блоги</a>
             </li>
           </ul>
-          <ul class="actions">
-            {% if user.is_authenticated %}
-            <li>
-              Здравствуйте, {{ user }}. Хотите <a href="{% url sign_out %}">покинуть</a> нас?
-            </li>
-            {% else %}
-            <li>
-              <a href="{% url sign_in %}">Представиться</a>
-            </li>
-            {% endif %}
-          </ul>
           {% if messages %}
           <ul class="messages">
               {% for message in messages %}
@@ -63,7 +53,8 @@
         {% endblock header%}
       </div>
       <div id="content">
-        {% block content %}<h1>Тут должно быть содержимое страницы!</h1>{% endblock content %}
+        {% block content %}<h1>Тут должно быть содержимое страницы!</h1>
+        <p class="serif">Даём вам честное пионерское, что на этой странице когда-нибудь появится вменяемое содержимое, а пока что, за неимением лучшего, &mdash; наслаждайтесь этим незамысловатым текстом.</p>{% endblock content %}
       </div>
       <div id="sidebar">
         {% block sidebar %}

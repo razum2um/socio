@@ -4,3 +4,4 @@ South==0.7.2
 -e git://github.com/brosner/django-mptt.git@3bc778306edc089838f7e8868fbf187cc88af434#egg=django_mptt-0.3_pre-py2.6-dev
 sorl-thumbnail==3.2.5
 textile==2.1.4
+-e git://git.openteam.ru/django-openteam/django_openteam.git@1fc8bb3b598b3ce67fe12b09cc164c5ff63d7837#egg=openteam-0.1.0-py2.6-dev

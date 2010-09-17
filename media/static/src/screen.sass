@@ -34,6 +34,10 @@ form.bp
   .submit
     +button-button
 
+  .announce
+    textarea
+      height: 100px
+
 // Page layout can be done using mixins applied to your semantic classes and IDs:
 body.two-col
   #container
@@ -48,11 +52,12 @@ body.two-col
         size: 2em
       color: #0099CC
 
-    ul.actions
-      +horizontal-list-container
-      font-size: 12px
-      padding:
-        left: 10px
+      sup
+        background: #FFCCCC
+        margin-left: 10px
+        font-size: 10px
+        padding: 3px
+        text-shadow: #FFEBEB 0px 1px 0px
 
     ul.navigation
       display: block
@@ -67,6 +72,7 @@ body.two-col
         padding:
           top: 3px
           bottom: 3px
+        text-shadow: #EDEDFF 0px 1px 0px
         +horizontal-list-item
 
     .messages
@@ -151,7 +157,6 @@ body.two-col
       .content
         margin-top: 5px
         font:
-          family: Georgia, serif
           size: 14px
 
     .highlight
@@ -161,4 +166,7 @@ body.two-col
     // One third of the grid columns, rounding down. With 24 cols, this is 8.
     $sidebar-columns: floor($blueprint-grid-columns / 4)
     +column($sidebar-columns, true)
+
+  .serif
+    font-family: Georgia, serif
 

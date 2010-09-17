@@ -9,7 +9,8 @@ from blog import Blog
 class Post (NameModel, TimestampModel):
     author   = models.ForeignKey(User, verbose_name=u'автор')
     blog    = models.ForeignKey(Blog, related_name='posts')
-    content  = models.TextField(u'текст')
+    announce = models.TextField(u'краткий анонс', null=True, blank=True)
+    content  = models.TextField(u'текст', )
     is_draft = models.BooleanField(u'черновик?', default=True)
 
     class Meta:

@@ -1,0 +1,4 @@
+{% load markup %}
+<span class="info">Пишет {{ post.author.username }}, {{ post.created_at|date:"d.m.Y" }} в {{ post.created_at|date:"H:i" }}</span>
+<div class="content serif">{{ post.content|textile|truncatewords_html:"100" }}</div>
+

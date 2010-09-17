@@ -7,8 +7,7 @@
 </h2>
 <div class="post">
   <h4>{{ post.name }}</h4>
-  <span class="info">Пишет {{ post.author.username }}, {{ post.created_at|date:"d.m.Y" }} в {{ post.created_at|date:"H:i" }}</span>
-  <div class="content">{{ post.content }}</div>
+  {% include "post/_content.html" %}
 </div>
 {% endblock content %}
 {% block sidebar %}
