@@ -60,5 +60,10 @@ urlpatterns = patterns('core.views',
         view  = 'post.edit',
         name  = 'edit_post'
     ),
+    url(
+        regex = '^post-(?P<id>\d+)/delete/$',
+        view  = 'post.delete',
+        name  = 'delete_post'
+    ),
 )
 

@@ -17,6 +17,7 @@
   {% if user.is_authenticated %}
     {% if post.author == user %}
   <li><a href="{% url edit_post id=post.id %}">Править запись</a></li>
+  <li><a href="{% url delete_post id=post.id %}">Удалить запись</a></li>
     {% endif %}
   <li><a href="{% url new_post blog_id=post.blog.id %}">Написать в блог</a></li>
   {% endif %}

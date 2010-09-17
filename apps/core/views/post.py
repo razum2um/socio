@@ -67,3 +67,10 @@ def edit(request, id):
         'post_form': post_form,
     }
 
+@login_required
+def delete(request, id):
+    post = get_object_or_404(Post, id=id, author=request.user)
+    blog_id = post.blog.id
+    post.delete()
+    return redirect_to_view('blog', id=blog_id)
+
