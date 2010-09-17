@@ -45,3 +45,25 @@ def show(request, id):
         'post': post,
     }
 
+@login_required
+@render_to('post/edit.html')
+def edit(request, id):
+    post = get_object_or_404(Post, id=id, author=request.user)
+
+    post_form = PostForm(instance=post)
+
+    if request.method == 'POST':
+        post_form = PostForm(request.POST, instance=post)
+
+        if post_form.is_valid():
+            post.save()
+
+            return redirect_to_view('post',
+                id = post.id
+            )
+
+    return {
+        'post': post,
+        'post_form': post_form,
+    }
+
