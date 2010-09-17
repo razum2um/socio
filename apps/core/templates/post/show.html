@@ -7,7 +7,9 @@
 </h2>
 <div class="post">
   <h4>{{ post.name }}</h4>
+  {% with "1" as full_text %}
   {% include "post/_content.html" %}
+  {% endwith %}
 </div>
 {% endblock content %}
 {% block sidebar %}
