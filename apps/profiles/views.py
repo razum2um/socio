@@ -45,7 +45,6 @@ def sign_up(request):
                 email    = form_data['email'],
                 password = random_password,
             )
-            UserProfile.objects.create(user=owner)
             # Send newly created user its password throug email
             send_email(
                 to = form_data['email'],
@@ -61,6 +60,9 @@ def sign_up(request):
                 username = form_data['email'],
                 password = random_password
             )
+
+            UserProfile.objects.create(user=user)
+
             login(request, user)
             # Greetings for newly signed up user
             messages.success(request, u"""Поздравляем вас! Теперь Вы &mdash;
