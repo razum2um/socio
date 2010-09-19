@@ -66,26 +66,23 @@ body.two-col
 
   #header
 
-    sup
-      background: #CCFF99
-      color:  #497A8A
-      margin-left: 10px
-      padding: 3px
-      +border-radius(3px)
-      //text-shadow: #FFEBEB 0px 1px 0px
-
-    ul.navigation
+    ul
       +horizontal-list-container
       display: inline-block
-      background-color: #CCCCFF
-      height: 25px
-      width: auto
-      padding: 5px 10px 0px
       +border-radius
-
+      padding: 5px 10px 0px
+      width: auto
+      height: 25px
+      &.navigation
+        background-color: #CCCCFF
+      &.actions
+        background-color: #CCFF99
+        color:  #497A8A
+        margin-left: 10px
       li
         //text-shadow: #EDEDFF 0px 1px 0px
         +horizontal-list-item
+
 
     .messages
       .info

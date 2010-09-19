@@ -30,15 +30,7 @@
     <div id="container">
       <div id="header">
         {% block header %}
-          <h1>{{ SITE.name }}
-            <sup>
-              {% if user.is_authenticated %}
-                Здравствуйте, <a href="{% url profile id=user.id %}">{{ user.get_profile.name }}</a>. <a href="{% url sign_out %}">Выйти</a>?
-              {% else %}
-                <a href="{% url sign_in %}">Представиться</a>
-              {% endif %}
-            </sup>
-          </h1>
+          <h1>{{ SITE.name }}</h1>
           <ul class="navigation">
             <li>
               <a href="{% url index %}">Заглавная</a>
@@ -49,6 +41,13 @@
             <li>
               <a href="{% url blogs %}">Блоги</a>
             </li>
+          </ul>
+          <ul class="actions">
+            {% if user.is_authenticated %}
+              <li>Здравствуйте, <a href="{% url profile id=user.id %}">{{ user.get_profile.name }}</a>. <a href="{% url sign_out %}">Выйти</a>?</li>
+            {% else %}
+              <li><a href="{% url sign_in %}">Представиться</a></li>
+            {% endif %}
           </ul>
           {% if messages %}
           <ul class="messages">
