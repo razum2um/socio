@@ -5,10 +5,12 @@ from django.contrib.auth.models import User
 from django.db import models
 
 from hashlib import md5
+from pytils import translit
 import os.path
 
 def user_upload_to(instance, filename):
     today = datetime.today()
+    filename = translit.translify(filename)
     new_name = md5(filename)
 
     path =  "uploads/users/%(uid)d/%(year)d/%(month)d/%(day)d/a_%(filename)s%(ext)s" % {

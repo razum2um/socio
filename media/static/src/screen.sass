@@ -26,17 +26,21 @@ body.bp
   h1
     color: $header-color
     font:
-      family: 'Helvetica Neue', Arial, Helvetica, sans-serif
+      family: $header-font-family
       size: 2.2em
   h2
     color: $header-color
     font:
-      family: 'Helvetica Neue', Arial, Helvetica, sans-serif
+      family: $header-font-family
       size: 1.6em
+    margin: 0
 
   h3
-    font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif
+    font-family: $header-font-family
 
+  h4
+    font-family: $header-font-family
+    margin: 0
 
   sup
     font-size: 10px
@@ -125,7 +129,6 @@ body.two-col
       &:visited
         color: $header-color
   h2
-    margin: 10px 0 10px 0
     a
       color: $header-color
       &:visited
@@ -137,10 +140,7 @@ body.two-col
   .level-1
     margin-left: 20px !important
   #content
-    // Two thirds of the grid columns, rounding up.
-    // With 24 cols, this is 16.
     $content-columns: ceil(4 * $blueprint-grid-columns / 5)
-    // true means it's the last column in the row
     +column($content-columns)
     h3
       margin:
@@ -151,6 +151,23 @@ body.two-col
       margin-top: 5px
       overflow: hidden
       padding: 0
+      &.communities
+        img
+          +float('left')
+          margin-right: 10px
+        li
+          margin-bottom: 30px
+
+    .community
+      .header
+        height: auto
+        img
+          margin-right: 10px
+          +float('left')
+      .body
+        margin-top: 10px
+        +column($content-columns)
+
     .description
       color: #999999
       font-size: 12px
@@ -179,8 +196,6 @@ body.two-col
       .dashboard
         height: 100px
         margin-bottom: 10px
-        h2
-          margin: 0
         .avatar
           margin-right: 10px
           +float('left')

@@ -32,7 +32,7 @@ def new(request):
 
 
     if request.method == 'POST':
-        community_form = CommunityForm(request.POST)
+        community_form = CommunityForm(request.POST, request.FILES)
 
         if community_form.is_valid():
             community = community_form.save()

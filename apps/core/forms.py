@@ -14,7 +14,7 @@ class CommunityForm (forms.ModelForm):
 
     class Meta:
         model = Community
-        fields = ['name', 'description']
+        exclude = ['created_at', 'updated_at']
 
 class PostForm (forms.ModelForm):
 
