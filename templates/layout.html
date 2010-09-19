@@ -43,6 +43,12 @@
               <a href="{% url blogs %}">Блоги</a>
             </li>
           </ul>
+          {% if not user.is_authenticated%}
+          <ul class="actions">
+            <li><a href="{% url sign_in %}">Войти</a></li></li>
+            <li><a href="{% url sign_up %}">Регистрация</a></li>
+          </ul>
+          {% endif %}
           </div>
           <div class="userbox">
             {% if user.is_authenticated %}
@@ -53,9 +59,6 @@
                 <a href="{% url profile id=user.id %}" class="undecorated bold dashboard">{{ user.get_profile.name }}</a>
                 <a href="{% url edit_profile id=user.id %}" class="dashboard">Настройки</a>
               </div>
-            {% else %}
-              <li><a href="{% url sign_in %}">Представиться</a></li>
-              <li><a href="{% url sign_up %}">Регистрация</a></li>
             {% endif %}
           </div>
           {% if messages %}
