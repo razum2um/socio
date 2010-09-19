@@ -17,6 +17,9 @@
 <ul class="no-list-style">
   {% if user.is_authenticated %}
   <li><a href="{% url new_post blog_id=blog.id %}">Написать в блог</a></li>
+  {% if user.is_superuser %}
+  <li><a href="{% url delete_blog id=blog.id %}">Удалить блог</a></li>
+  {% endif %}
   {% endif %}
 </ul>
 {% endblock sidebar %}

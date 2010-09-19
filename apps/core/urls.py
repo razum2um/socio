@@ -44,6 +44,11 @@ urlpatterns = patterns('core.views',
         view  = 'blog.show',
         name  = 'blog'
     ),
+    url(
+        regex = '^blog-(?P<id>\d+)/delete/$',
+        view  = 'blog.delete',
+        name  = 'delete_blog'
+    ),
 # ------------------------------------------------------------------------------
     url(
         regex = '^blog-(?P<blog_id>\d+)/posts/new/$',
