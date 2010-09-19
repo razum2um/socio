@@ -5,3 +5,4 @@ South==0.7.2
 sorl-thumbnail==3.2.5
 textile==2.1.4
 -e git://git.openteam.ru/django-openteam/django_openteam.git@1fc8bb3b598b3ce67fe12b09cc164c5ff63d7837#egg=openteam-0.1.0-py2.6-dev
+-e git://github.com/j2a/pytils.git@4316927ff5d3fda3dbcc31815d0b80e777b9f3d2#egg=pytils-0.2.4dev_20100919-py2.6-dev
