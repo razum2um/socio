@@ -7,7 +7,7 @@
     <li>
       <a href="{% url community id=community.id %}" title={{ community.name }}>
       {% if community.picture %}
-        {% thumbnail community.picture 50x50 as icon %}
+        {% thumbnail community.picture 60x60 as icon %}
         <img src="{{ icon }}" alt="{{ community.name }}">
       {% endif %}
       </a>
