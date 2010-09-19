@@ -100,62 +100,49 @@ body.two-col
         background: #FFFCA8
         padding: 0.8em
         margin-bottom: 1em
-
   h1
     margin: 10px 0 10px 0
     a
       color: $header-color
       &:visited
         color: $header-color
-
   h2
     margin: 10px 0 10px 0
     a
       color: $header-color
       &:visited
         color: $header-color
-
   ul.no-list-style
     list-style-type: none
     margin: 10px 0 0
     padding: 0
-
   .level-1
     margin-left: 20px !important
-
   #content
     // Two thirds of the grid columns, rounding up.
     // With 24 cols, this is 16.
     $content-columns: ceil(3 * $blueprint-grid-columns / 4)
     // true means it's the last column in the row
     +column($content-columns)
-
     h3
       margin:
         top: 0.5em
         bottom: 0.5em
-
     ul
       list-style-type: none
       margin-top: 5px
       overflow: hidden
       padding: 0
-
     .description
       color: #999999
       font-size: 12px
-
     .message
       margin-top: 100px
-
-
     .post
       margin-bottom: 15px
-
       h4
         color: $header-color
         margin-bottom: 5px
-
       .info
         color: #999999
         font:
@@ -163,14 +150,21 @@ body.two-col
           style: italic
         a
           color: #999999
-
       .content
         margin-top: 5px
         font:
           size: 14px
-
     .highlight
       background: #F9FADE
+    .profile
+      +column($content-columns)
+      .avatar
+        margin-right: 10px
+        +float('left')
+      dt
+        +clearfix
+        +float('left')
+        margin-right: 10px
 
   #sidebar
     // One third of the grid columns, rounding down. With 24 cols, this is 8.

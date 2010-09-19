@@ -83,7 +83,6 @@ def sign_out(request):
 
     return redirect_to_view('index')
 
-@login_required
 @render_to("profiles/show.html")
 def show(request, id):
     owner = get_object_or_404(User, id=id)
