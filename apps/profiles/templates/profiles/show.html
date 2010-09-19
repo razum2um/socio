@@ -9,7 +9,7 @@
       <img src="{{ avatar }}" alt="{{ owner.get_profile.name }}" class="avatar"/>
     {% endif %}
     <h2>
-      {{ owner.get_profile.name }}
+      {{ owner.get_full_name }}
       {% if user == owner or user.is_superuser %}
       <sup>
         <a href="{% url edit_profile id=user.id %}">Редактировать</a>?
@@ -24,7 +24,9 @@
   </div>
   <div class="info">
     <p>С нами с {{ owner.date_joined|date:"d.m.Y" }}
+    {% if owner.get_profile.description%}
     <p>{{ owner.get_profile.description }}</p>
+    {% endif %}
   </div>
 </div>
 {% endblock content %}
