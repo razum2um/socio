@@ -34,14 +34,14 @@ body.bp
       family: $header-font-family
       size: 1.6em
     margin: 0
-
   h3
     font-family: $header-font-family
-
   h4
     font-family: $header-font-family
     margin: 0
-
+  h5
+    font-family: $header-font-family
+    margin: 0.5em
   sup
     font-size: 10px
 
@@ -138,7 +138,12 @@ body.two-col
     margin: 10px 0 0
     padding: 0
   .level-1
-    margin-left: 20px !important
+    li
+      background-color: #FFCC66
+      font-size: 12px
+      padding: 5px
+      margin-left: 20px !important
+      +border-radius(3px)
   #content
     $content-columns: ceil(4 * $blueprint-grid-columns / 5)
     +column($content-columns)
@@ -157,6 +162,11 @@ body.two-col
           margin-right: 10px
         li
           margin-bottom: 30px
+      &.posts
+        margin-top: 20px
+        li
+          margin-bottom: 30px
+
 
     .community
       .header
@@ -189,6 +199,8 @@ body.two-col
         margin-top: 5px
         font:
           size: 14px
+        p
+          margin-bottom: 0.5em
     .highlight
       background: #F9FADE
     .profile
