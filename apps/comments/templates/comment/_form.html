@@ -1,0 +1,9 @@
+{% load helpers %}
+<form action="{% url new_comment item_id=item.id %}" method="POST" class="bp">
+  <p {% if comment_form.content.errors %}class="error"{% endif %}>
+    {{ comment_form.content.label_tag }}
+    {{ comment_form.content }}
+  </p>
+  <p>{% submit_tag 'отправить' %}</p>
+</form>
+

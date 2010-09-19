@@ -11,6 +11,7 @@ urlpatterns = patterns('',
         name  = 'index'
     ),
     (r'^profiles/', include('profiles.urls')),
+    (r'^comments/', include('comments.urls')),
     (r'^', include('core.urls')),
     # Example:
     # (r'^socio/', include('socio.foo.urls')),

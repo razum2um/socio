@@ -97,6 +97,7 @@ INSTALLED_APPS = (
 # ----------------
     'core',
     'profiles',
+    'comments',
 )
 
 CACHE_BACKEND = 'dummy://'

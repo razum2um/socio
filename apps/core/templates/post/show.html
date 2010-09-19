@@ -11,6 +11,14 @@
   {% include "post/_content.html" %}
   {% endwith %}
 </div>
+<div class="comments">
+
+</div>
+<div id="comment_form">
+{% with post as item %}
+  {% include "comment/_form.html" %}
+{% endwith %}
+</div>
 {% endblock content %}
 {% block sidebar %}
 <ul class="no-list-style">
