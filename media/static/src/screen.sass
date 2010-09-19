@@ -5,6 +5,7 @@
 @import partials/base
 
 @import "compass/utilities/lists"
+@import "compass/css3/border-radius"
 
 $header-color: #006699
 
@@ -21,6 +22,24 @@ body.bp
   +blueprint-utilities
   +blueprint-debug
   +blueprint-interaction
+
+  h1
+    color: $header-color
+    font:
+      family: 'Helvetica Neue', Arial, Helvetica, sans-serif
+      size: 2.2em
+  h2
+    color: $header-color
+    font:
+      family: 'Helvetica Neue', Arial, Helvetica, sans-serif
+      size: 1.6em
+
+  h3
+    font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif
+
+
+  sup
+    font-size: 10px
   // Remove the scaffolding when you're ready to start doing visual design.
   // Or leave it in if you're happy with how blueprint looks out-of-the-box
 form.bp
@@ -46,33 +65,26 @@ body.two-col
     +column($blueprint-grid-columns)
 
   #header
-    h2
-      font:
-        family: sans
-        size: 2em
-      color: #0099CC
 
-      sup
-        background: #FFCCCC
-        margin-left: 10px
-        font-size: 10px
-        padding: 3px
-        text-shadow: #FFEBEB 0px 1px 0px
+    sup
+      background: #CCFF99
+      color:  #497A8A
+      margin-left: 10px
+      padding: 3px
+      +border-radius(3px)
+      //text-shadow: #FFEBEB 0px 1px 0px
 
     ul.navigation
-      display: block
-      width: auto
       +horizontal-list-container
+      display: inline-block
+      background-color: #CCCCFF
+      height: 25px
+      width: auto
+      padding: 5px 10px 0px
+      +border-radius
 
       li
-        background-color: #CCCCFF
-        border:
-          left: 6px solid #CCCCFF
-          right: 6px solid #CCCCFF
-        padding:
-          top: 3px
-          bottom: 3px
-        text-shadow: #EDEDFF 0px 1px 0px
+        //text-shadow: #EDEDFF 0px 1px 0px
         +horizontal-list-item
 
     .messages
@@ -90,8 +102,6 @@ body.two-col
         margin-bottom: 1em
 
   h1
-    color: $header-color
-    font-size: 24px
     margin: 10px 0 10px 0
     a
       color: $header-color
@@ -99,8 +109,6 @@ body.two-col
         color: $header-color
 
   h2
-    color: $header-color
-    font-size: 20px
     margin: 10px 0 10px 0
     a
       color: $header-color
@@ -145,14 +153,16 @@ body.two-col
       margin-bottom: 15px
 
       h4
-        color: #003366
+        color: $header-color
         margin-bottom: 5px
 
       .info
-        color: #CCCCCC
+        color: #999999
         font:
           size: 12px
           style: italic
+        a
+          color: #999999
 
       .content
         margin-top: 5px

@@ -1,2 +1,22 @@
 {% extends "layout.html" %}
+{% load thumbnail %}
+{% block title %}Профиль пользователя {{ owner }}{% endblock %}
+{% block content %}
+  <h2>
+    Профиль пользователя {{ owner.get_profile.name }}
+    {% if user == owner or user.is_superuser %}
+    <sup>
+      <a href="{% url edit_profile id=user.id %}">Редактировать</a>?
+    </sup>
+    {% endif %}
+  </h2>
+  {% if owner.get_profile.avatar %}
+    {% thumbnail owner.get_profile.avatar 100x100 as avatar %}
+    <div class="avatar"><img src="{{ avatar }}" alt="{{ owner.get_profile.name }}" /></div>
+  {% endif %}
+  <dl>
+    <dt>Имя:</dt>
+    <dd>{{ owner.first_name }} {{ owner.last_name }}</dd>
+  </dl>
+{% endblock content %}
 

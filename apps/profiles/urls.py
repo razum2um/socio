@@ -22,11 +22,11 @@ urlpatterns = patterns('profiles.views',
         view  = 'sign_out',
         name  = 'sign_out',
     ),
-#    url(
-#        regex = r'^(?P<id>\d+)/edit/$',
-#        view  = 'edit',
-#        name  = 'profiles_edit',
-#    ),
+    url(
+        regex = r'^(?P<id>\d+)/edit/$',
+        view  = 'edit',
+        name  = 'edit_profile',
+    ),
 #    url(
 #        regex = r'^(?P<id>\d+)/delete/$',
 #        view  = 'delete',

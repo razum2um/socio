@@ -105,4 +105,5 @@ AUTH_PROFILE_MODULE = 'profiles.UserProfile'
 LOGIN_URL = '/profiles/signin/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_URL = '/profiles/signout/'
+THUMBNAIL_BASEDIR='thumbnails/'
 

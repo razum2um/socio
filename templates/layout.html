@@ -30,8 +30,15 @@
     <div id="container">
       <div id="header">
         {% block header %}
-          <h2>{{ SITE.name }}<sup>{% if user.is_authenticated %}Вы &mdash; <a href="{% url profile id=user.id %}">{{ user }}</a>. <a href="{% url sign_out %}">Выйти</a>?{% else %}<a href="{% url sign_in %}">Представиться</a>{% endif %}
-</sup></h2>
+          <h1>{{ SITE.name }}
+            <sup>
+              {% if user.is_authenticated %}
+                Вы &mdash; <a href="{% url profile id=user.id %}">{{ user.get_profile.name }}</a>. <a href="{% url sign_out %}">Выйти</a>?
+              {% else %}
+                <a href="{% url sign_in %}">Представиться</a>
+              {% endif %}
+            </sup>
+          </h1>
           <ul class="navigation">
             <li>
               <a href="{% url index %}">Заглавная</a>
