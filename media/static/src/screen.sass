@@ -40,6 +40,11 @@ body.bp
 
   sup
     font-size: 10px
+
+  .undecorated
+    text-decoration: none
+  .bold
+    font-weight: bold
   // Remove the scaffolding when you're ready to start doing visual design.
   // Or leave it in if you're happy with how blueprint looks out-of-the-box
 form.bp
@@ -65,24 +70,40 @@ body.two-col
     +column($blueprint-grid-columns)
 
   #header
-
-    ul
-      +horizontal-list-container
-      display: inline-block
-      +border-radius
-      padding: 5px 10px 0px
-      width: auto
-      height: 25px
-      &.navigation
-        background-color: #CCCCFF
-      &.actions
-        background-color: #CCFF99
-        color:  #497A8A
-        margin-left: 10px
-      li
-        //text-shadow: #EDEDFF 0px 1px 0px
-        +horizontal-list-item
-
+    margin-bottom: 10px
+    .title
+      float: left
+      ul
+        +clearfix
+        +horizontal-list-container
+        display: inline-block
+        +border-radius
+        padding: 5px 10px 0px
+        width: auto
+        height: 25px
+        &.navigation
+          background-color: #CCCCFF
+        &.actions
+          background-color: #CCFF99
+          color:  #497A8A
+          margin-left: 10px
+        li
+          +horizontal-list-item
+    .userbox
+      margin-top: 10px
+      text-align: right
+      +float('right')
+      .logout
+        font-size: 12px
+      .current-user
+        height: 50px
+        a
+          font-size: 12px
+        img
+          +float('right')
+        .dashboard
+          display: block
+          margin-right: 60px
 
     .messages
       .info
@@ -118,7 +139,7 @@ body.two-col
   #content
     // Two thirds of the grid columns, rounding up.
     // With 24 cols, this is 16.
-    $content-columns: ceil(3 * $blueprint-grid-columns / 4)
+    $content-columns: ceil(4 * $blueprint-grid-columns / 5)
     // true means it's the last column in the row
     +column($content-columns)
     h3
@@ -155,17 +176,20 @@ body.two-col
       background: #F9FADE
     .profile
       +column($content-columns)
-      .avatar
-        margin-right: 10px
-        +float('left')
-      dt
+      .dashboard
+        height: 100px
+        margin-bottom: 10px
+        h2
+          margin: 0
+        .avatar
+          margin-right: 10px
+          +float('left')
+      .info
         +clearfix
-        +float('left')
-        margin-right: 10px
 
   #sidebar
     // One third of the grid columns, rounding down. With 24 cols, this is 8.
-    $sidebar-columns: floor($blueprint-grid-columns / 4)
+    $sidebar-columns: floor($blueprint-grid-columns / 5)
     +column($sidebar-columns, true)
 
   .serif

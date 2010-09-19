@@ -1,6 +1,6 @@
 {% load markup %}
 <span class="info">
-  <a href="{% url profile id=post.author.id %}">{{ post.author.get_profile.name }}</a> &mdash; {{ post.created_at|date:"d.m.Y" }} в {{ post.created_at|date:"H:i" }}
+  {{ post.created_at|date:"d.m.Y" }} в {{ post.created_at|date:"H:i" }} &mdash; <a href="{% url profile id=post.author.id %}">{{ post.author.get_profile.name }}</a>
 </span>
 <div class="content serif">
   {% if full_text %}

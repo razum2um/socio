@@ -3,22 +3,29 @@
 {% block title %}Профиль пользователя {{ owner }}{% endblock %}
 {% block content %}
 <div class="profile">
-  {% if owner.get_profile.avatar %}
-    {% thumbnail owner.get_profile.avatar 100x100 as avatar %}
-    <img src="{{ avatar }}" alt="{{ owner.get_profile.name }}" class="avatar"/>
-  {% endif %}
-  <h2>
-    {{ owner.get_profile.name }}
-    {% if user == owner or user.is_superuser %}
-    <sup>
-      <a href="{% url edit_profile id=user.id %}">Редактировать</a>?
-    </sup>
+  <div class="dashboard">
+    {% if owner.get_profile.avatar %}
+      {% thumbnail owner.get_profile.avatar 100x100 as avatar %}
+      <img src="{{ avatar }}" alt="{{ owner.get_profile.name }}" class="avatar"/>
     {% endif %}
-  </h2>
-  <dl>
-    <dt>Имя:</dt>
-    <dd>{{ owner.first_name }} {{ owner.last_name }}</dd>
-  </dl>
+    <h2>
+      {{ owner.get_profile.name }}
+      {% if user == owner or user.is_superuser %}
+      <sup>
+        <a href="{% url edit_profile id=user.id %}">Редактировать</a>?
+      </sup>
+      {% endif %}
+    </h2>
+    <div class="navigation">
+      <a href="#">В сообществах</a>
+      <a href="#">В блогах</a>
+      <a href="#">В комментариях</a>
+    </div>
+  </div>
+  <div class="info">
+    <p>С нами с {{ owner.date_joined|date:"d.m.Y" }}
+    <p>{{ owner.get_profile.description }}</p>
+  </div>
 </div>
 {% endblock content %}
 

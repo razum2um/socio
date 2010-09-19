@@ -90,6 +90,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.markup',
 # ----------------
+    'django_extensions',
     'south',
     'sorl.thumbnail',
     'openteam',

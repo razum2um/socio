@@ -1,12 +1,18 @@
 {% extends "layout.html" %}
-{% load helpers %}
+{% load helpers thumbnail %}
 {% block title %}Редактирование профиля {{ owner }}{% endblock %}
 {% block content %}
-<h2>Редактирование профиля {{ owner.get_profile.name }}</h2>
+<h2>{{ owner.get_profile.name }}, редактирование профиля</h2>
 <form action="{% url edit_profile id=owner.id %}" method="POST" class="bp" enctype="multipart/form-data">
   {% csrf_token %}
   <p {% if profile_form.avatar.errors %}class="error"{% endif %}>
     {{ profile_form.avatar.label_tag }}
+    {% if owner.get_profile.avatar %}
+      {% thumbnail owner.get_profile.avatar 100x100 as avatar %}
+      <img src="{{ avatar }}" alt="{{ owner.get_profile.name }}" class="avatar"/>
+    {% endif %}
+  </p>
+  <p>
     {{ profile_form.avatar }}
   </p>
   <p {% if user_form.first_name.errors %}class="error"{% endif %}>
@@ -16,6 +22,10 @@
   <p {% if user_form.last_name.errors %}class="error"{% endif %} class="announce">
     {{ user_form.last_name.label_tag }}
     {{ user_form.last_name }}
+  </p>
+  <p {% if profile_form.description.errors %}class="error"{% endif %} class="announce">
+    {{ profile_form.description.label_tag }}
+    {{ profile_form.description }}
   </p>
   <p>{% submit_tag 'сохранить' %}</p>
 </form>

@@ -25,6 +25,6 @@ class UserForm (forms.ModelForm):
 class UserProfileForm (forms.ModelForm):
 
     class Meta:
-        fields = ['avatar']
+        exclude = ['user']
         model  = UserProfile
 
