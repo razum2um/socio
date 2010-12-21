@@ -1,0 +1,17 @@
+{% load markup %}
+<div class="content serif">
+  {% if full_text %}
+    {% if post.announce %}{{ post.announce|textile }}{% endif %}
+    {{ post.content|textile }}
+  {% else %}
+    {% if post.announce %}
+      {{ post.announce|textile|truncatewords_html:"50" }}
+    {% else %}
+      {{ post.content|textile|truncatewords_html:"50" }}
+    {% endif %}
+  {% endif %}
+</div>
+<span class="info">
+  {{ post.created_at|date:"d.m.Y" }} в {{ post.created_at|date:"H:i" }} &mdash; <a href="{% url profile id=post.author.id %}">{{ post.author.get_profile.name }}</a>
+</span>
+

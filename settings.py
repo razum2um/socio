@@ -60,18 +60,21 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.admin',
+    'django.contrib.markup',
 # ----------------
     'sorl.thumbnail',
     'openteam',
 # ----------------
     'core',
     'profiles',
+    'comments',
 )
 
 AUTH_PROFILE_MODULE = 'profiles.UserProfile'
 LOGIN_URL = '/profiles/signin/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_URL = '/profiles/signout/'
+THUMBNAIL_BASEDIR='thumbnails/'
 
 
 try:

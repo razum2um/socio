@@ -2,7 +2,7 @@
 {% load helpers %}
 {% block title %}Новый блог в сообществе{% endblock title %}
 {% block content %}
-<h1>{{ community.name }}&nbsp;&rarr; Новый блог</h1>
+<h2>{{ community.name }}&nbsp;&rarr; Новый блог</h2>
   <form method="POST" action="{% url new_blog community_id=community.id %}" class="bp">
     {% csrf_token %}
     <p {% if blog_form.name.errors %}class="error"{% endif %}>

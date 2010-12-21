@@ -9,6 +9,11 @@ urlpatterns = patterns('core.views',
     ),
 # ------------------------------------------------------------------------------
     url(
+        regex = '^communities/$',
+        view  = 'community.index',
+        name  = 'communities'
+    ),
+    url(
         regex = '^communities/join/$',
         view  = 'community.join',
         name  = 'join_community'
@@ -19,32 +24,51 @@ urlpatterns = patterns('core.views',
         name  = 'new_community'
     ),
     url(
-        regex = '^communities/(?P<id>\d+)/$',
+        regex = '^community(?P<id>\d+)/$',
         view  = 'community.show',
         name  = 'community'
     ),
 # ------------------------------------------------------------------------------
     url(
-        regex = '^communities/(?P<community_id>\d+)/blogs/new/$',
+        regex = '^blogs/$',
+        view  = 'blog.index',
+        name  = 'blogs'
+    ),
+    url(
+        regex = '^community(?P<community_id>\d+)/blogs/new/$',
         view  = 'blog.new',
         name  = 'new_blog'
     ),
     url(
-        regex = '^communities/(?P<community_id>\d+)/blogs/(?P<id>\d+)/$',
+        regex = '^blog(?P<id>\d+)/$',
         view  = 'blog.show',
         name  = 'blog'
     ),
+    url(
+        regex = '^blog-(?P<id>\d+)/delete/$',
+        view  = 'blog.delete',
+        name  = 'delete_blog'
+    ),
 # ------------------------------------------------------------------------------
     url(
-        regex = '^communities/(?P<community_id>\d+)/blogs/(?P<blog_id>\d+)/posts/new/$',
+        regex = '^blog(?P<blog_id>\d+)/posts/new/$',
         view  = 'post.new',
         name  = 'new_post'
     ),
     url(
-        regex = '^communities/(?P<community_id>\d+)/blogs/(?P<blog_id>\d+)/posts/(?P<id>\d+)/$',
+        regex = '^post(?P<id>\d+)/$',
         view  = 'post.show',
         name  = 'post'
     ),
-
+    url(
+        regex = '^post(?P<id>\d+)/edit/$',
+        view  = 'post.edit',
+        name  = 'edit_post'
+    ),
+    url(
+        regex = '^post(?P<id>\d+)/delete/$',
+        view  = 'post.delete',
+        name  = 'delete_post'
+    ),
 )
 

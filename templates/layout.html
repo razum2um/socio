@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-{% load community_tags %}
+{% load community_tags thumbnail %}
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru">
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
@@ -30,16 +30,37 @@
     <div id="container">
       <div id="header">
         {% block header %}
+          <div class="title">
+          <h1>{{ SITE.name }}</h1>
           <ul class="navigation">
             <li>
               <a href="{% url index %}">Заглавная</a>
             </li>
-            {% if user.is_authenticated %}
             <li>
-              Здравствуйте, {{ user }}. Хотите <a href="{% url sign_out %}">покинуть</a> нас?
+              <a href="{% url communities %}">Сообщества</a>
             </li>
-            {% endif %}
+            <li>
+              <a href="{% url blogs %}">Блоги</a>
+            </li>
           </ul>
+          {% if not user.is_authenticated%}
+          <ul class="actions">
+            <li><a href="{% url sign_in %}">Войти</a></li></li>
+            <li><a href="{% url sign_up %}">Регистрация</a></li>
+          </ul>
+          {% endif %}
+          </div>
+          <div class="userbox">
+            {% if user.is_authenticated %}
+              {% thumbnail user.get_profile.avatar 50x50 as avatar %}
+              <span class="logout"><a href="{% url sign_out %}">Выйти</a></span>
+              <div class="current-user">
+                <a href="{% url profile id=user.id %}"><img src="{{ avatar }}" /></a>
+                <a href="{% url profile id=user.id %}" class="undecorated bold dashboard">{{ user.get_profile.name }}</a>
+                <a href="{% url edit_profile id=user.id %}" class="dashboard">Настройки</a>
+              </div>
+            {% endif %}
+          </div>
           {% if messages %}
           <ul class="messages">
               {% for message in messages %}
@@ -50,7 +71,8 @@
         {% endblock header%}
       </div>
       <div id="content">
-        {% block content %}<h1>Тут должно быть содержимое страницы!</h1>{% endblock content %}
+        {% block content %}<h1>Тут должно быть содержимое страницы!</h1>
+        <p class="serif">Даём вам честное пионерское, что на этой странице когда-нибудь появится вменяемое содержимое, а пока что, за неимением лучшего, &mdash; наслаждайтесь этим незамысловатым текстом.</p>{% endblock content %}
       </div>
       <div id="sidebar">
         {% block sidebar %}
@@ -58,7 +80,7 @@
             <h4>Мои сообщества:</h4>
             {% communities_side_list %}
           {% else %}
-            <p><a href="{% url sign_in %}">Представиться</a></p>
+
           {% endif %}
         {% endblock sidebar %}
       </div>

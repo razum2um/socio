@@ -5,7 +5,7 @@ from openteam.models import TimestampModel, NameModel
 from community import Community
 
 class Blog (NameModel, TimestampModel):
-    communities = models.ManyToManyField(Community,
+    community = models.ForeignKey(Community,
             verbose_name = u'сообщества',
             related_name = 'blogs'
     )

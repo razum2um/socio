@@ -1,25 +1,25 @@
 {% extends "layout.html" %}
 {% block title %}{{ blog.name }}{% endblock title %}
 {% block content %}
-<h1><a href="{% url community id=community.id %}">{{ community.name }}</a>&nbsp;&rarr; {{ blog.name }}</h1>
+<h2><a href="{% url community id=blog.community.id %}">{{ blog.community.name }}</a>&nbsp;&rarr; {{ blog.name }}</h2>
 <ul class="posts no-list-style">
   {% for post in blog.posts.all %}
     <li class="post">
-      <h4><a href="{% url post community_id=community.id,blog_id=blog.id,id=post.id %}">{{ post.name }}</a></h4>
-      <span class="info">Пишет {{ post.author.username }}, {{ post.created_at|date:"d.m.Y" }} в {{ post.created_at|date:"H:i" }}</span>
-      <div class="content">{{ post.content }}</div>
+      <h4><a href="{% url post id=post.id %}">{{ post.name }}</a></h4>
+      {% include "post/_content.html" %}
     </li>
   {% empty %}
-    <li>Беда-беда, ни одной записи в этом блоге. Срочно <a href="{% url new_post community_id=community.id,blog_id=blog.id %}">исправьте это недоразумение</a>!</li>
+    <li>Беда-беда, ни одной записи в этом блоге. Срочно <a href="{% url new_post blog_id=blog.id %}">исправьте это недоразумение</a>!</li>
   {% endfor %}
 </ul>
 {% endblock content %}
 {% block sidebar %}
 <ul class="no-list-style">
   {% if user.is_authenticated %}
-  <li><a href="{% url new_post community_id=community.id,blog_id=blog.id %}">Написать в блог</a></li>
-  {% else %}
-  <li><a href="{% url sign_in %}">Представиться</a></li>
+  <li><a href="{% url new_post blog_id=blog.id %}">Написать в блог</a></li>
+  {% if user.is_superuser %}
+  <li><a href="{% url delete_blog id=blog.id %}">Удалить блог</a></li>
+  {% endif %}
   {% endif %}
 </ul>
 {% endblock sidebar %}

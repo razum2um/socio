@@ -5,17 +5,15 @@
 {% for post in posts %}
   <li class="post">
     <h4>
-      <a href="{% url blog community_id=post.blogs.latest.communities.latest.id,id=post.blogs.latest.id %}">
-        {{ post.blogs.latest.name }}
+      <a href="{% url blog id=post.blog.id %}">
+        {{ post.blog.name }}
       </a>
       &nbsp;&rarr;
-      <a href="{% url post community_id=post.blogs.latest.communities.latest.id,blog_id=post.blogs.latest.id,id=post.id %}">
+      <a href="{% url post id=post.id %}">
         {{ post.name }}
       </a>
     </h4>
-    <span class="info">Пишет {{ post.author.username }}, {{ post.created_at|date:"d.m.Y" }} в {{ post.created_at|date:"H:i" }}</span>
-    <div class="content">{{ post.content }}</div>
-  </li>
+    {% include "post/_content.html" %}  </li>
 {% empty %}
   <li>
     <div class="message error">Мы вынуждены сообщить вам о том, что здесь никто еще ничего не писал. И да, это шанс для вас стать первым среди равных!</div>

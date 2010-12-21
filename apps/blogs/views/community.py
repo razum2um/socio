@@ -8,10 +8,20 @@ from core.forms import CommunityForm
 from core.models import Community
 
 
+@render_to('community/index.html')
+def index(request):
+    communities = Community.objects.allowed_read(request.user)
+
+    return {
+        'communities': communities,
+    }
+
+
 @login_required
 @render_to('community/join.html')
 def join(request):
     communities = Community.objects.allowed_read(request.user)
+
     return {
         'communities': communities,
     }
@@ -20,7 +30,7 @@ def join(request):
 @login_required
 @render_to('community/new.html')
 def new(request):
-    community_form = CommunityForm(request.POST or None)
+    community_form = CommunityForm(request.POST or None, request.FILES or None)
 
     if community_form.is_valid():
         community = community_form.save()
@@ -35,6 +45,7 @@ def new(request):
 @render_to('community/show.html')
 def show(request, id):
     community = get_object_or_404(Community, id=id)
+
     return {
         'community': community,
     }

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 
@@ -10,16 +10,27 @@ from openteam.shortcuts import redirect_to_view
 from blogs.models import Community, Blog
 from blogs.forms import BlogForm
 
+@render_to('blog/index.html')
+def index(request):
+    blogs = Blog.objects.all()
+
+    return {
+        'blogs': blogs,
+    }
+
+
 @login_required
 @render_to('blog/new.html')
 def new(request, community_id):
     community = get_object_or_404(Community, id=community_id)
-
     blog_form = BlogForm(request.POST or None)
+
     if blog_form.is_valid():
-        blog = blog_form.save()
-        community.blogs.add(blog)
-        return redirect_to_view('blog', community_id=community.id, id=blog.id)
+        blog = blog_form.save(commit=False)
+        blog.community = community
+        blog.save()
+
+        return redirect_to_view('blog', id=blog.id)
 
     return {
         'community': community,
@@ -28,17 +39,19 @@ def new(request, community_id):
 
 
 @render_to('blog/show.html')
-def show(request, community_id, id):
-    community = get_object_or_404(Community, id=community_id)
+def show(request, id):
+    blog = get_object_or_404(Blog ,id=id)
 
-    try:
-        blog = community.blogs.get(id=id)
+    return {
+        'blog': blog,
+    }
 
-        return {
-            'community': community,
-            'blog': blog,
-        }
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def delete(request, id):
+    blog = get_object_or_404(Blog, id=id)
+    community_id = blog.community.id
+    blog.delete()
 
-    except Blog.DoesNotExist:
-        raise Http404
+    return redirect_to_view('community', id=community_id)
 

@@ -1,0 +1,6 @@
+h1. Just another social blog platform
+
+p. Created for fun and proovement that frameworks and agile is nifty way of developing
+
+p. All requirements listed under the @packages.list@, so just run @pip install -r packages.list@ under the virtualenv to get application workaround.
+

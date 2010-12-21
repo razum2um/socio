@@ -5,6 +5,7 @@
 @import partials/base
 
 @import "compass/utilities/lists"
+@import "compass/css3/border-radius"
 
 $header-color: #006699
 
@@ -21,6 +22,33 @@ body.bp
   +blueprint-utilities
   +blueprint-debug
   +blueprint-interaction
+
+  h1
+    color: $header-color
+    font:
+      family: $header-font-family
+      size: 2.2em
+  h2
+    color: $header-color
+    font:
+      family: $header-font-family
+      size: 1.6em
+    margin: 0
+  h3
+    font-family: $header-font-family
+  h4
+    font-family: $header-font-family
+    margin: 0
+  h5
+    font-family: $header-font-family
+    margin: 0.5em
+  sup
+    font-size: 10px
+
+  .undecorated
+    text-decoration: none
+  .bold
+    font-weight: bold
   // Remove the scaffolding when you're ready to start doing visual design.
   // Or leave it in if you're happy with how blueprint looks out-of-the-box
 form.bp
@@ -34,6 +62,10 @@ form.bp
   .submit
     +button-button
 
+  .announce
+    textarea
+      height: 100px
+
 // Page layout can be done using mixins applied to your semantic classes and IDs:
 body.two-col
   #container
@@ -42,10 +74,41 @@ body.two-col
     +column($blueprint-grid-columns)
 
   #header
-    ul.navigation
-      +horizontal-list-container
-      > li
-        +horizontal-list-item
+    margin-bottom: 10px
+    .title
+      float: left
+      ul
+        +clearfix
+        +horizontal-list-container
+        display: inline-block
+        +border-radius
+        padding: 5px 10px 0px
+        width: auto
+        height: 25px
+        &.navigation
+          background-color: #CCCCFF
+        &.actions
+          background-color: #CCFF99
+          color:  #497A8A
+          margin-left: 10px
+        li
+          +horizontal-list-item
+    .userbox
+      margin-top: 10px
+      text-align: right
+      +float('right')
+      .logout
+        font-size: 12px
+      .current-user
+        height: 50px
+        a
+          font-size: 12px
+        img
+          +float('right')
+        .dashboard
+          display: block
+          margin-right: 60px
+
     .messages
       .info
         color: #312973
@@ -59,70 +122,103 @@ body.two-col
         background: #FFFCA8
         padding: 0.8em
         margin-bottom: 1em
-
   h1
-    color: $header-color
-    font-size: 24px
     margin: 10px 0 10px 0
     a
       color: $header-color
       &:visited
         color: $header-color
-
   h2
-    color: $header-color
-    font-size: 20px
-    margin: 10px 0 10px 0
     a
       color: $header-color
       &:visited
         color: $header-color
-
   ul.no-list-style
     list-style-type: none
     margin: 10px 0 0
     padding: 0
-
   .level-1
-    margin-left: 20px !important
-
+    li
+      background-color: #FFCC66
+      font-size: 12px
+      padding: 5px
+      margin-left: 20px !important
+      +border-radius(3px)
   #content
-    // Two thirds of the grid columns, rounding up.
-    // With 24 cols, this is 16.
-    $content-columns: ceil(3 * $blueprint-grid-columns / 4)
-    // true means it's the last column in the row
+    $content-columns: ceil(4 * $blueprint-grid-columns / 5)
     +column($content-columns)
+    h3
+      margin:
+        top: 0.5em
+        bottom: 0.5em
+    ul
+      list-style-type: none
+      margin-top: 5px
+      overflow: hidden
+      padding: 0
+      &.communities
+        img
+          +float('left')
+          margin-right: 10px
+        li
+          margin-bottom: 30px
+      &.posts
+        margin-top: 20px
+        li
+          margin-bottom: 30px
+
+
+    .community
+      .header
+        height: auto
+        img
+          margin-right: 10px
+          +float('left')
+      .body
+        margin-top: 10px
+        +column($content-columns)
 
     .description
       color: #999999
       font-size: 12px
-
     .message
       margin-top: 100px
-
-
     .post
-
+      margin-bottom: 15px
       h4
-        color: #003366
+        color: $header-color
         margin-bottom: 5px
-
       .info
-        color: #CCCCCC
+        color: #999999
         font:
           size: 12px
           style: italic
-
+        a
+          color: #999999
       .content
         margin-top: 5px
         font:
-          family: Georgia, serif
           size: 14px
-
+        p
+          margin-bottom: 0.5em
     .highlight
       background: #F9FADE
+    .profile
+      +column($content-columns)
+      .dashboard
+        height: 100px
+        margin-bottom: 10px
+        .avatar
+          margin-right: 10px
+          +float('left')
+      .info
+        +clearfix
+
   #sidebar
     // One third of the grid columns, rounding down. With 24 cols, this is 8.
-    $sidebar-columns: floor($blueprint-grid-columns / 4)
+    $sidebar-columns: floor($blueprint-grid-columns / 5)
     +column($sidebar-columns, true)
+
+  .serif
+    font-family: Georgia, serif
 

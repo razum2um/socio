@@ -2,9 +2,13 @@
 {% load helpers %}
 {% block title %}Новое сообщество{% endblock title %}
 {% block content %}
-  <h1>Новое сообщество</h1>
-  <form method="POST" action="{% url new_community %}" class="bp">
+  <h2>Новое сообщество</h2>
+  <form method="POST" action="{% url new_community %}" enctype="multipart/form-data" class="bp">
     {% csrf_token %}
+    <p {% if community_form.picture.errors %}class="error"{% endif %}>
+      {{ community_form.picture.label_tag }}
+      {{ community_form.picture }}
+    </p>
     <p {% if community_form.name.errors %}class="error"{% endif %}>
       {{ community_form.name.label_tag }}
       {{ community_form.name }}

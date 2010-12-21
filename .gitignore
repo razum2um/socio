@@ -1,4 +1,6 @@
 *.pyc
 *.sqlite3
 local_settings.py
-
+*.sass-cache*
+media/uploads
+media/thumbnails

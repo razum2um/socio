@@ -1,0 +1,18 @@
+{% load helpers %}
+<form method="POST" action="{{ action }}" class="bp">
+  {% csrf_token %}
+  <p {% if post_form.name.errors %}class="error"{% endif %}>
+    {{ post_form.name.label_tag }}
+    {{ post_form.name }}
+  </p>
+  <p {% if post_form.announce.errors %}class="error"{% endif %} class="announce">
+    {{ post_form.announce.label_tag }}
+    {{ post_form.announce }}
+  </p>
+  <p {% if post_form.content.errors %}class="error"{% endif %}>
+    {{ post_form.content.label_tag }}
+    {{ post_form.content }}
+  </p>
+  <p>{% submit_tag 'сохранить' %}</p>
+</form>
+

@@ -4,7 +4,7 @@
     <a href="{% url community id=community.id %}">{{ community.name }}</a>
     <ul class="no-list-style level-1">
     {% for blog in community.blogs.all %}
-      <li><a href="{% url blog community_id=community.id,id=blog.id %}">{{ blog.name }}</a></li>
+      <li><a href="{% url blog id=blog.id %}">{{ blog.name }}</a></li>
     {% empty %}
       <li>в этом сообществе пока еще нет блогов</li>
     {% endfor %}

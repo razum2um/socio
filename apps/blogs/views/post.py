@@ -14,49 +14,56 @@ def index(request):
 
 @login_required
 @render_to('post/new.html')
-def new(request, community_id, blog_id):
-    community = get_object_or_404(Community, id=community_id)
-    try:
-        blog = community.blogs.get(id=blog_id)
+def new(request, blog_id):
+    blog = get_object_or_404(Blog, id=blog_id)
+    post_form = PostForm(request.POST or None)
 
-        post_form = PostForm(request.POST or None)
+    if post_form.is_valid():
+        post = post_form.save(commit=False)
+        post.author = request.user
+        post.save()
+        blog.posts.add(post)
 
-        if post_form.is_valid():
-            post = post_form.save(commit=False)
-            post.author = request.user
-            post.save()
-            blog.posts.add(post)
+        return redirect_to_view('post',
+            id = post.id
+        )
 
-            return redirect_to_view('post',
-                community_id = community.id,
-                blog_id      = blog.id,
-                id           = post.id
-            )
-
-        return {
-            'community': community,
-            'blog': blog,
-            'post_form': post_form,
-        }
-
-    except Blog.DoesNotExist:
-        raise Http404
-
-
+    return {
+        'blog': blog,
+        'post_form': post_form,
+    }
 
 @render_to('post/show.html')
-def show(request, community_id, blog_id, id):
-    community = get_object_or_404(Community, id=community_id)
-    try:
-        blog = community.blogs.get(id=blog_id)
-        post = blog.posts.get(id=id)
+def show(request, id):
+    post = get_object_or_404(Post, id=id)
 
-        return {
-            'community': community,
-            'blog': blog,
-            'post': post,
-        }
+    return {
+        'post': post,
+    }
 
-    except (Blog.DoesNotExist, Post.DoesNotExist):
-        raise Http404
+@login_required
+@render_to('post/edit.html')
+def edit(request, id):
+    post = get_object_or_404(Post, id=id, author=request.user)
+    post_form = PostForm(request.POST or None, instance=post)
+
+    if post_form.is_valid():
+        post.save()
+
+        return redirect_to_view('post',
+            id = post.id
+        )
+
+    return {
+        'post': post,
+        'post_form': post_form,
+    }
+
+@login_required
+def delete(request, id):
+    post = get_object_or_404(Post, id=id, author=request.user)
+    blog_id = post.blog.id
+    post.delete()
+
+    return redirect_to_view('blog', id=blog_id)
 
