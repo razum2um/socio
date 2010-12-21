@@ -2,7 +2,7 @@
 from django.db import models
 from openteam.models import NameModel, TimestampModel
 
-from core.managers.community import CommunityManager
+from blogs.managers.community import CommunityManager
 
 C_OPEN = 1
 C_CLOSED = 2
@@ -22,6 +22,6 @@ class Community (NameModel, TimestampModel):
     objects = CommunityManager()
 
     class Meta:
-        app_label = 'core'
+        app_label = 'blogs'
         get_latest_by = 'created_at'
 

@@ -13,6 +13,6 @@ class Blog (NameModel, TimestampModel):
 
 
     class Meta:
-        app_label = 'core'
+        app_label = 'blogs'
         get_latest_by = 'created_at'
 

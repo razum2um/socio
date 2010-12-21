@@ -1,4 +1,59 @@
+# -*- coding: utf-8 -*-
+from django.conf import settings
 # set SMTP hostname here
 EMAIL_HOST = None
-DEBUG = False
+INTERNAL_IPS = ('127.0.0.1',)
+
+SERVER_EMAIL = '<no-reply@localhost>'
+DEFAULT_FROM_EMAIL = '<webmaster@localhost>'
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'socio.sqlite3',                      # Or path to database file if using sqlite3.
+        'USER': '',                      # Not used with sqlite3.
+        'PASSWORD': '',                  # Not used with sqlite3.
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+    }
+}
+
+ADMINS = (
+    ('Egor V. Nazarkin', 'nimnull@gmail.com'),
+)
+
+SECRET_KEY = 'your secret here'
+
+if settings.DEBUG:
+    CACHE_BACKEND = 'dummy://'
+    CACHE_MIDDLEWARE_SECONDS = 0
+    INSTALLED_APPS = settings.INSTALLED_APPS + [
+        'debug_toolbar',
+        'south',
+    ]
+    MIDDLEWARE_CLASSES = settings.MIDDLEWARE_CLASSES + (
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+    )
+
+else:
+    MIDDLEWARE_CLASSES = (
+        'django.middleware.cache.UpdateCacheMiddleware',
+    ) + MIDDLEWARE_CLASSES + (
+        'django.middleware.http.ConditionalGetMiddleware',
+        'django.middleware.gzip.GZipMiddleware',
+        'django.middleware.cache.FetchFromCacheMiddleware'
+    )
+    CACHE_BACKEND = 'file:///tmp/django_cache'
+    CACHE_MIDDLEWARE_SECONDS = 2400
+
+DEBUG_TOOLBAR_CONFIG = {
+    'INTERCEPT_REDIRECTS': False,
+}
+
+THUMBNAIL_BASEDIR = 'thumbnails'
+
+MANAGERS = ADMINS
+
+AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',)
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 

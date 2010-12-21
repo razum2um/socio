@@ -18,22 +18,20 @@ def new(request, community_id, blog_id):
     community = get_object_or_404(Community, id=community_id)
     try:
         blog = community.blogs.get(id=blog_id)
-        post_form = PostForm()
 
-        if request.method == 'POST':
-            post_form = PostForm(request.POST)
+        post_form = PostForm(request.POST or None)
 
-            if post_form.is_valid():
-                post = post_form.save(commit=False)
-                post.author = request.user
-                post.save()
-                blog.posts.add(post)
+        if post_form.is_valid():
+            post = post_form.save(commit=False)
+            post.author = request.user
+            post.save()
+            blog.posts.add(post)
 
-                return redirect_to_view('post',
-                    community_id = community.id,
-                    blog_id      = blog.id,
-                    id           = post.id
-                )
+            return redirect_to_view('post',
+                community_id = community.id,
+                blog_id      = blog.id,
+                id           = post.id
+            )
 
         return {
             'community': community,

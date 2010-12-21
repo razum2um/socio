@@ -13,6 +13,6 @@ class Post (NameModel, TimestampModel):
     is_draft = models.BooleanField(u'черновик?', default=True)
 
     class Meta:
-        app_label = 'core'
+        app_label = 'blogs'
         ordering = ['-created_at']
 

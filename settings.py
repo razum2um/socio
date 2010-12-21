@@ -1,35 +1,13 @@
 # -*- coding: utf-8 -*-
 from manage import rel
 
-try:
-    from local_settings import *
-except ImportError:
-    pass
-
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-
-ADMINS = (
-    ('Egor V. Nazarkin', 'nimnull@gmail.com'),
-)
-
-MANAGERS = ADMINS
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'socio.sqlite3',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-    }
-}
 
 TIME_ZONE = 'Asia/Novosibirsk'
 
 LANGUAGE_CODE = 'ru'
-
+FIRST_DAY_OF_WEEK = 1
 SITE_ID = 1
 
 USE_I18N = True
@@ -46,24 +24,18 @@ IMG_URL     = STATIC_URL + 'img/'
 
 ADMIN_MEDIA_PREFIX = '/media/admin/'
 
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = 'ovt4_#lp7=o)_)20e6r_gvl58%p90)^zcdc6vsd5%e5v3i01lx'
-
-# List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'openteam.middleware.StripWhitespaceMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware'
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -87,9 +59,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
-#    'django.contrib.admin',
+    'django.contrib.admin',
 # ----------------
-    'south',
     'sorl.thumbnail',
     'openteam',
 # ----------------
@@ -97,11 +68,14 @@ INSTALLED_APPS = (
     'profiles',
 )
 
-CACHE_BACKEND = 'dummy://'
-CACHE_MIDDLEWARE_SECONDS = 0
-
 AUTH_PROFILE_MODULE = 'profiles.UserProfile'
 LOGIN_URL = '/profiles/signin/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_URL = '/profiles/signout/'
+
+
+try:
+    from local_settings import *
+except ImportError:
+    pass
 

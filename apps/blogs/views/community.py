@@ -20,16 +20,12 @@ def join(request):
 @login_required
 @render_to('community/new.html')
 def new(request):
-    community_form = CommunityForm()
+    community_form = CommunityForm(request.POST or None)
 
+    if community_form.is_valid():
+        community = community_form.save()
 
-    if request.method == 'POST':
-        community_form = CommunityForm(request.POST)
-
-        if community_form.is_valid():
-            community = community_form.save()
-
-            return redirect_to_view('community', id=community.id)
+        return redirect_to_view('community', id=community.id)
 
     return {
         'community_form': community_form,

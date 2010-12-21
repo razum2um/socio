@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.template import Library, Node, Variable, TemplateSyntaxError
 
-from core.models import Community
+from blogs.models import Community
 
 register = Library()
 
