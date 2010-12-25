@@ -14,16 +14,16 @@ from models import UserProfile
 
 @render_to("profiles/sign_up.html")
 def sign_up(request):
-    # catch already authenticated, which try to point their browsers here
-    if request.user.is_authenticated(): return redirect_to_view('index')
 
+    if request.user.is_authenticated():
+        return redirect_to_view('index')
 
     sign_up_form = SignUpForm(request.POST or None)
 
     if sign_up_form.is_valid():
         form_data = sign_up_form.cleaned_data
-        # check against email address exestance
         email_matching = User.objects.filter(email=form_data['email'])
+        
         if email_matching.count() != 0:
             messages.error(request,
                 u'Email %(email)s уже зарегистрирован. Используйте другой.' %
@@ -40,21 +40,13 @@ def sign_up(request):
             email    = form_data['email'],
             password = random_password,
         )
-        # Send newly created user its password throug email
-        send_email(
-            to = form_data['email'],
-            tpl = 'signup',
-            context = {
-                'email': form_data['email'],
-                'password': random_password,
-            }
+        send_email(to=form_data['email'], tpl='signup',
+                   context = {
+                    'email': form_data['email'],
+                    'password': random_password,
+                    }
         )
-        # Authenticate user on site, to omit usless step of viewing email and
-        # filling form with login/pass
-        user = authenticate(
-            username = form_data['email'],
-            password = random_password
-        )
+        user = authenticate(username=form_data['email'], password=random_password)
 
         UserProfile.objects.create(user=user)
 
