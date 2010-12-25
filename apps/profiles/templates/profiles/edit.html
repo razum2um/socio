@@ -7,10 +7,9 @@
   {% csrf_token %}
   <p {% if profile_form.avatar.errors %}class="error"{% endif %}>
     {{ profile_form.avatar.label_tag }}
-    {% if owner.get_profile.avatar %}
       {% thumbnail owner.get_profile.avatar 100x100 as avatar %}
       <img src="{{ avatar }}" alt="{{ owner.get_profile.name }}" class="avatar"/>
-    {% endif %}
+    {% endthumbnail %}
   </p>
   <p>
     {{ profile_form.avatar }}
@@ -29,5 +28,5 @@
   </p>
   <p>{% submit_tag 'сохранить' %}</p>
 </form>
-{% endblock %}
+{% endblock content %}
 

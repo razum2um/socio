@@ -7,6 +7,7 @@
     {% if owner.get_profile.avatar %}
       {% thumbnail owner.get_profile.avatar 100x100 as avatar %}
       <img src="{{ avatar }}" alt="{{ owner.get_profile.name }}" class="avatar"/>
+      {% endthumbnail %}
     {% endif %}
     <h2>
       {{ owner.get_full_name }}

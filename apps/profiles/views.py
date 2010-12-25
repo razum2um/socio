@@ -24,7 +24,7 @@ def sign_up(request):
         form_data = sign_up_form.cleaned_data
         email_matching = User.objects.filter(email=form_data['email'])
         
-        if email_matching.count() != 0:
+        if email_matching.count():
             messages.error(request,
                 u'Email %(email)s уже зарегистрирован. Используйте другой.' %
                 {
