@@ -11,9 +11,6 @@ from openteam.utils import send_email
 
 from forms import SignUpForm, SignInForm, UserForm, UserProfileForm
 from models import UserProfile
-#@render_to("profiles/index.html")
-#def index(request):
-#    return {}
 
 @render_to("profiles/sign_up.html")
 def sign_up(request):
