@@ -18,5 +18,9 @@ class Comment(TimestampModel):
     _commentable_content_type = models.ForeignKey(ContentType, related_name="comments")
     _commentable_object_id = models.PositiveIntegerField()
 
+    class Meta:
+        app_label = 'comments'
+
+
 mptt.register(Comment)
 

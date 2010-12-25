@@ -7,7 +7,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(
         regex = '^$',
-        view  = 'core.views.post.index',
+        view  = 'core.views.index',
         name  = 'index'
     ),
     (r'^profiles/', include('profiles.urls')),

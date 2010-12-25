@@ -4,8 +4,8 @@ from django.shortcuts import get_object_or_404
 from openteam.decorators import post_only, render_to
 from openteam.shortcuts import redirect_to_view
 
-from core.forms import CommunityForm
-from core.models import Community
+from blogs.forms import CommunityForm
+from blogs.models import Community
 
 
 @render_to('community/index.html')

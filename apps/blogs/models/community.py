@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
-from django.db import models
-from core.managers.community import CommunityManager
-from openteam.models import NameModel, TimestampModel
+import os.path
+from hashlib import md5
 from pytils import translit
 
-from blogs.managers.community import CommunityManager
-from hashlib import md5
-import os.path
+from django.db import models
+
+from openteam.models import NameModel, TimestampModel
+
+from blogs.managers import CommunityManager
+
 
 C_OPEN = 1
 C_CLOSED = 2

@@ -132,3 +132,7 @@ def edit(request, id):
 #def delete(request, id):
 #    return {}
 
+@render_to('profiles/dashboard.html')
+def dashboard (request):
+    return dict()
+

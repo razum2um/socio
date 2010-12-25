@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls.defaults import patterns, url, include
 
-urlpatterns = patterns('core.views',
+urlpatterns = patterns('blogs.views',
     url(
         regex = '^$',
         view  = 'post.index',

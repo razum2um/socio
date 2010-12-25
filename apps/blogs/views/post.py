@@ -4,8 +4,8 @@ from django.shortcuts import get_object_or_404
 from openteam.decorators import render_to
 from openteam.shortcuts import redirect_to_view
 
-from core.forms import PostForm
-from core.models import Blog, Community, Post
+from blogs.forms import PostForm
+from blogs.models import Blog, Community, Post
 
 @render_to('post/index.html')
 def index(request):

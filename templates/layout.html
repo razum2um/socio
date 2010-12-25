@@ -59,6 +59,7 @@
                 <a href="{% url profile id=user.id %}" class="undecorated bold dashboard">{{ user.get_profile.name }}</a>
                 <a href="{% url edit_profile id=user.id %}" class="dashboard">Настройки</a>
               </div>
+              {% endthumbnail %}
             {% endif %}
           </div>
           {% if messages %}

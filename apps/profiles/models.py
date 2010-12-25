@@ -29,10 +29,17 @@ class UserProfile (models.Model):
     user = models.OneToOneField(User)
     avatar = models.ImageField(u'аватар', upload_to=user_upload_to, null=True, blank=True)
     description = models.TextField(u'Несколько слов о себе', blank=True, null=True)
+
+
+    class Meta:
+        app_label = 'profiles'
+
     @property
     def name(self):
+
         if self.user.first_name:
             return self.user.first_name
+
         else:
             return self.user.username
 
