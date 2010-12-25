@@ -1,4 +1,4 @@
-h1. Just another social blog platform
+h1. Dating project core platform
 
 p. Created for fun and proovement that frameworks and agile is nifty way of developing
 
