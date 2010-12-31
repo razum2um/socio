@@ -1,9 +1,8 @@
-<<<<<<< HEAD
 PIL
 Django
 South
--e git://github.com/django-mptt/django-mptt.git#egg=mptt
+-e git+git://github.com/django-mptt/django-mptt.git#egg=mptt
 sorl-thumbnail
 textile
--e git://git.openteam.ru/django-openteam/django_openteam.git#egg=openteam
-
+-e git+git://git.openteam.ru/django-openteam/django_openteam.git#egg=openteam
+django-debug-toolbar
