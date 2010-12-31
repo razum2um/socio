@@ -39,7 +39,7 @@ class UserProfile (models.Model):
     avatar      = models.ImageField(u'аватар', upload_to=user_upload_to, null=True, blank=True)
     sex         = models.IntegerField(u'пол', default=0, choices=SEX_CHOICES)
     birth_date  = models.DateField(u'дата рождения', null=True, blank=True)
-    show_bd     = models.BooleanField(u'показывать на сайте?', default=True)
+    show_bd     = models.BooleanField(u'показывать на сайте?', default=True, help_text="показывать возраст на сайте?")
     summary     = models.TextField(u'Несколько слов о себе', blank=True, null=True)
     life_dids   = models.TextField(u'Несколько слов о себе', blank=True, null=True)
     good_at     = models.TextField(u'Несколько слов о себе', blank=True, null=True)
@@ -54,6 +54,10 @@ class UserProfile (models.Model):
 
     class Meta:
         app_label = 'profiles'
+
+
+    def __unicode__(self):
+        return self.name        
 
     @property
     def name(self):
