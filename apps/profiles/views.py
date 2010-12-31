@@ -73,9 +73,7 @@ def sign_out(request):
 @render_to("profiles/show.html")
 def show(request, id):
     owner = get_object_or_404(User, id=id)
-
-    print owner.get_profile().avatar
-
+    
     if get_object_or_none(UserProfile, user=owner) is None:
         UserProfile.objects.create(user=owner)
 

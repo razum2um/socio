@@ -5,8 +5,9 @@
 <div class="community">
   <div class="header">
     {% if community.picture %}
-      {% thumbnail community.picture 150x150 as picture %}
+      {% thumbnail community.picture "150x150" as picture %}
       <img src="{{ picture }}" alt="{{ community.name }}" />
+      {% endthumbnail %}
     {% endif %}
     <h2>{{ community.name }}</h2>
     <span class="description">{{ community.description }}</span>
