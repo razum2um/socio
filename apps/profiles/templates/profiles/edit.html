@@ -7,8 +7,8 @@
   {% csrf_token %}
   <p {% if profile_form.avatar.errors %}class="error"{% endif %}>
     {{ profile_form.avatar.label_tag }}
-      {% thumbnail owner.get_profile.avatar 100x100 as avatar %}
-      <img src="{{ avatar }}" alt="{{ owner.get_profile.name }}" class="avatar"/>
+      {% thumbnail owner.get_profile.avatar "100x100" as avatar %}
+      <img src="{{ avatar.url }}" alt="{{ owner.get_profile.name }}" class="avatar"/>
     {% endthumbnail %}
   </p>
   <p>

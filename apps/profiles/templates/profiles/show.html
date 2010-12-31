@@ -4,11 +4,11 @@
 {% block content %}
 <div class="profile">
   <div class="dashboard">
-    {% if owner.get_profile.avatar %}
-      {% thumbnail owner.get_profile.avatar 100x100 as avatar %}
-      <img src="{{ avatar }}" alt="{{ owner.get_profile.name }}" class="avatar"/>
-      {% endthumbnail %}
-    {% endif %}
+    {% thumbnail owner.get_profile.avatar "100x100" as avatar %}
+    <img src="{{ avatar.url }}" alt="{{ owner.get_profile.name }}" class="avatar"/>
+    {% empty %}
+    <img src="{{ IMG_URL }}av_empty.png" alt="{{ owner.get_profile.name }}" class="avatar"/>
+    {% endthumbnail %}
     <h2>
       {{ owner.get_full_name }}
       {% if user == owner or user.is_superuser %}
