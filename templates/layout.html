@@ -88,9 +88,17 @@
                     <label for="password">Пароль:</label>
                     <input type="text" name="password" id="password" />
                 </p>
-                <p><input type="submit" value="войти" class="submit"/></p>
-                <p><a href="{% url password_reset %}">забыли пароль?</a></p>
+                <p>
+                    <input type="submit" value="войти" class="submit"/>
+                    <a href="{% url password_reset %}">забыли пароль?</a>
+                </p>
                 </form>
+                <p>
+                    Тут мы обязательно напишем какую-нибудь штуку, которая рассказывает о том, на сколько мы классные.
+                </p>
+                <p>
+                    Круче и прикольнее нас просто нет никого в этой вселенной. И это факт!
+                </p>
             {% endif %}
           {% endblock sidebar %}
         </div>

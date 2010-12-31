@@ -6,6 +6,9 @@
 @import fancy-buttons
 
 @import partials/base
+@import partials/login_form_side
+
+
 
 $header-color: #006699
 
@@ -62,24 +65,6 @@ form.bp
   .announce
     textarea
       height: 100px
-
-form.login
-  +blueprint-form-sizes(130px, 130px, 250px)
-  +blueprint-form-borders
-  +blueprint-form-layout
-
-  label
-    font-size: 0.9em
-
-  input
-    margin: 0 !important
-
-  p
-    margin: 4px
-
-  .submit
-    +fancy-button(#BDBDBD, 14px)
-    width: 140px
 
 
 body.two-col
