@@ -41,15 +41,6 @@ class UserProfile (models.Model):
     birth_date  = models.DateField(u'дата рождения', null=True, blank=True)
     show_bd     = models.BooleanField(u'показывать на сайте?', default=True, help_text="показывать возраст на сайте?")
     summary     = models.TextField(u'Несколько слов о себе', blank=True, null=True)
-    life_dids   = models.TextField(u'Несколько слов о себе', blank=True, null=True)
-    good_at     = models.TextField(u'Несколько слов о себе', blank=True, null=True)
-    people_say  = models.TextField(u'Несколько слов о себе', blank=True, null=True)
-    favorites   = models.TextField(u'Несколько слов о себе', blank=True, null=True)
-    never       = models.TextField(u'Несколько слов о себе', blank=True, null=True)
-    thinking    = models.TextField(u'Несколько слов о себе', blank=True, null=True)
-    friday      = models.TextField(u'Несколько слов о себе', blank=True, null=True)
-    private     = models.TextField(u'Несколько слов о себе', blank=True, null=True)
-    message_if  = models.TextField(u'Несколько слов о себе', blank=True, null=True)
 
 
     class Meta:
