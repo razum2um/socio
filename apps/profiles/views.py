@@ -23,7 +23,7 @@ def sign_up(request):
     if sign_up_form.is_valid():
         form_data = sign_up_form.cleaned_data
         email_matching = User.objects.filter(email=form_data['email'])
-        
+
         if email_matching.count():
             messages.error(request,
                 u'Email %(email)s уже зарегистрирован. Используйте другой.' %
@@ -73,7 +73,7 @@ def sign_out(request):
 @render_to("profiles/show.html")
 def show(request, id):
     owner = get_object_or_404(User, id=id)
-    
+
     if get_object_or_none(UserProfile, user=owner) is None:
         UserProfile.objects.create(user=owner)
 
@@ -86,26 +86,19 @@ def show(request, id):
 @render_to("profiles/edit.html")
 def edit(request, id):
     owner = get_object_or_404(User, id=id)
-    profile = owner.get_profile()
-
-    user_form = UserForm(instance=owner, prefix='user_')
-    profile_form = UserProfileForm(instance=profile, prefix='profile_')
 
     if request.user.id != owner.id and request.user.is_superuser == False:
         return redirect_to_view('index')
 
-    if request.method == 'POST':
-        user_form = UserForm(request.POST, instance=owner, prefix='user_')
-        profile_form = UserProfileForm(request.POST, request.FILES, instance=profile, prefix='profile_')
+    profile = owner.get_profile()
+    user_form = UserForm(request.POST or None, instance=owner, prefix='user_')
+    profile_form = UserProfileForm(request.POST or None, request.FILES or None, instance=profile, prefix='profile_')
 
-        if user_form.is_valid():
-            user_form.save()
+    if user_form.is_valid():
+        user_form.save()
 
-        if profile_form.is_valid():
-            profile_form.save()
-
-            return redirect_to_view('profile', id=owner.id)
-
+    if profile_form.is_valid():
+        profile_form.save()
 
     return {
         'profile_form': profile_form,

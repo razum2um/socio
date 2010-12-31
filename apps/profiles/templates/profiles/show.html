@@ -7,7 +7,7 @@
     {% thumbnail owner.get_profile.avatar "100x100" as avatar %}
     <img src="{{ avatar.url }}" alt="{{ owner.get_profile.name }}" class="avatar"/>
     {% empty %}
-    <img src="{{ IMG_URL }}av_empty.png" alt="{{ owner.get_profile.name }}" class="avatar"/>
+    <img src="{{ IMG_URL }}av_empty.png" alt="{{ owner.get_profile.name }}" width="48" height="48" class="avatar"/>
     {% endthumbnail %}
     <h2>
       {{ owner.get_full_name }}

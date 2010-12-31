@@ -54,18 +54,6 @@
             {% endif %}
           </ul>
           </div>
-          <div class="userbox">
-            {% if user.is_authenticated %}
-              {% thumbnail user.get_profile.avatar 50x50 as avatar %}
-              <span class="logout"><a href="{% url sign_out %}">Выйти</a></span>
-              <div class="current-user">
-                <a href="{% url profile id=user.id %}"><img src="{{ avatar }}" /></a>
-                <a href="{% url profile id=user.id %}" class="undecorated bold dashboard">{{ user.get_profile.name }}</a>
-                <a href="{% url edit_profile id=user.id %}" class="dashboard">Настройки</a>
-              </div>
-              {% endthumbnail %}
-            {% endif %}
-          </div>
           {% if messages %}
           <ul class="messages">
               {% for message in messages %}
@@ -78,6 +66,16 @@
         <div id="sidebar">
           {% block sidebar %}
             {% if user.is_authenticated %}
+              <span class="logout"><a href="{% url sign_out %}">Выйти</a></span>
+              <div class="current-user">
+              {% thumbnail user.get_profile.avatar "50x50" as avatar %}
+                <a href="{% url profile id=user.id %}"><img src="{{ avatar.url }}" /></a>
+              {% empty %}
+                <img src="{{ IMG_URL }}av_empty.png" alt="{{ owner.get_profile.name }}" width="48" height="48" class="avatar"/>
+              {% endthumbnail %}
+                <a href="{% url profile id=user.id %}" class="undecorated bold dashboard">{{ user.get_profile.name }}</a>
+                <a href="{% url edit_profile id=user.id %}" class="dashboard">Настройки</a>
+              </div>
             {% else %}
                 <h2>Вход на сайт</h2>
                 <form method="post" action="{% url sign_in %}" class="login">

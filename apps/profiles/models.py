@@ -30,7 +30,6 @@ def user_upload_to(instance, filename):
             'filename': new_name.hexdigest(),
             'ext': os.path.splitext(filename)[-1]
         }
-    print path
     return path
 
 
@@ -48,7 +47,7 @@ class UserProfile (models.Model):
 
 
     def __unicode__(self):
-        return self.name        
+        return self.name
 
     @property
     def name(self):
