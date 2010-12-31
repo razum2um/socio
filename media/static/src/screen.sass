@@ -1,11 +1,11 @@
 @import blueprint/reset
 @import blueprint
-@import blueprint/buttons
 @import blueprint/scaffolding
-@import partials/base
+@import compass/utilities/lists
+@import compass/css3/border-radius
+@import fancy-buttons
 
-@import "compass/utilities/lists"
-@import "compass/css3/border-radius"
+@import partials/base
 
 $header-color: #006699
 
@@ -54,19 +54,34 @@ body.bp
 form.bp
   +blueprint-form-layout
   +blueprint-form-borders
-  +blueprint-form-sizes(390px, 390px, 250px)
 
   label
+    font-size: 0.9em
     display: block
-
-  .submit
-    +button-button
 
   .announce
     textarea
       height: 100px
 
-// Page layout can be done using mixins applied to your semantic classes and IDs:
+form.login
+  +blueprint-form-sizes(130px, 130px, 250px)
+  +blueprint-form-borders
+  +blueprint-form-layout
+
+  label
+    font-size: 0.9em
+
+  input
+    margin: 0 !important
+
+  p
+    margin: 4px
+
+  .submit
+    +fancy-button(#BDBDBD, 14px)
+    width: 140px
+
+
 body.two-col
   #container
     +container
@@ -76,6 +91,7 @@ body.two-col
   #header
     margin-bottom: 10px
     .title
+      +prepend(4)
       float: left
       ul
         +clearfix
@@ -146,7 +162,7 @@ body.two-col
       +border-radius(3px)
   #content
     $content-columns: ceil(4 * $blueprint-grid-columns / 5)
-    +column($content-columns)
+    +column($content-columns, true)
     h3
       margin:
         top: 0.5em
@@ -215,9 +231,8 @@ body.two-col
         +clearfix
 
   #sidebar
-    // One third of the grid columns, rounding down. With 24 cols, this is 8.
     $sidebar-columns: floor($blueprint-grid-columns / 5)
-    +column($sidebar-columns, true)
+    +column($sidebar-columns)
 
   .serif
     font-family: Georgia, serif

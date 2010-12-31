@@ -53,7 +53,6 @@
             <li><a href="{% url sign_up %}">Регистрация</a></li>
             {% endif %}
           </ul>
-
           </div>
           <div class="userbox">
             {% if user.is_authenticated %}
@@ -76,19 +75,28 @@
           {% endif %}
         {% endblock header%}
       </div>
+        <div id="sidebar">
+          {% block sidebar %}
+            {% if user.is_authenticated %}
+            {% else %}
+                <h2>Вход на сайт</h2>
+                <form method="post" action="{% url sign_in %}" class="login">
+                {% csrf_token %}
+                <p>
+                    <label for="username">Логин или e-mail:</label>
+                    <input type="text" name="username" id="username" />
+                    <label for="password">Пароль:</label>
+                    <input type="text" name="password" id="password" />
+                </p>
+                <p><input type="submit" value="войти" class="submit"/></p>
+                <p><a href="{% url password_reset %}">забыли пароль?</a></p>
+                </form>
+            {% endif %}
+          {% endblock sidebar %}
+        </div>
       <div id="content">
         {% block content %}<h1>Тут должно быть содержимое страницы!</h1>
         <p class="serif">Даём вам честное пионерское, что на этой странице когда-нибудь появится вменяемое содержимое, а пока что, за неимением лучшего, &mdash; наслаждайтесь этим незамысловатым текстом.</p>{% endblock content %}
-      </div>
-      <div id="sidebar">
-        {% block sidebar %}
-          {% if user.is_authenticated %}
-            <h4>Мои сообщества:</h4>
-            {% communities_side_list %}
-          {% else %}
-
-          {% endif %}
-        {% endblock sidebar %}
       </div>
       <div id="footer">
         {% block footer%}{% endblock %}
