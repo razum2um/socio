@@ -1,5 +1,5 @@
-@import blueprint/reset
 @import blueprint
+@import blueprint/reset
 @import blueprint/scaffolding
 @import compass/utilities/lists
 @import compass/css3/border-radius
@@ -52,8 +52,9 @@ body.bp
     text-decoration: none
   .bold
     font-weight: bold
-  // Remove the scaffolding when you're ready to start doing visual design.
-  // Or leave it in if you're happy with how blueprint looks out-of-the-box
+  .serif
+    font-family: Georgia, Palatino, Palatino Linotype, Times, Times New Roman, serif
+
 form.bp
   +blueprint-form-layout
   +blueprint-form-borders
@@ -69,159 +70,34 @@ form.bp
   .submit
     +fancy-button(#276201)
 
-
 body.two-col
   #container
     +container
+    //+showgrid('/media/static/img/grid.png')
+
   #header, #footer
     +column($blueprint-grid-columns)
 
   #header
-    margin-bottom: 10px
-    .title
-      +prepend(4)
-      float: left
-      ul
-        +clearfix
-        +horizontal-list-container
-        display: inline-block
-        +border-radius
-        padding: 5px 10px 0px
-        width: auto
-        height: 25px
-        &.navigation
-          background-color: #CCCCFF
-        &.actions
-          background-color: #CCFF99
-          color:  #497A8A
-          margin-left: 10px
-        li
-          +horizontal-list-item
-    .userbox
-      margin-top: 10px
-      text-align: right
-      +float('right')
-      .logout
-        font-size: 12px
-      .current-user
-        height: 50px
-        a
-          font-size: 12px
-        img
-          +float('right')
-        .dashboard
-          display: block
-          margin-right: 60px
+    .actions
+      +inline-block-list
+      position: absolute
+      top: 0
+      +prepend(20)
 
-    .messages
-      .info
-        color: #312973
-        border: 2px solid #3426AD
-        background: #A399FF
-        padding: 0.8em
-        margin-bottom: 1em
-      .warning
-        color: #6B6814
-        border: 2px solid #E6DF25
-        background: #FFFCA8
-        padding: 0.8em
-        margin-bottom: 1em
-  h1
-    margin: 10px 0 10px 0
-    a
-      color: $header-color
-      &:visited
-        color: $header-color
-  h2
-    a
-      color: $header-color
-      &:visited
-        color: $header-color
-  ul.no-list-style
-    list-style-type: none
-    margin: 10px 0 0
-    padding: 0
-  .level-1
-    li
-      background-color: #FFCC66
-      font-size: 12px
-      padding: 5px
-      margin-left: 20px !important
-      +border-radius(3px)
   #content
-    $content-columns: ceil(4 * $blueprint-grid-columns / 5)
-    +column($content-columns, true)
-    h3
-      margin:
-        top: 0.5em
-        bottom: 0.5em
-    ul
-      list-style-type: none
-      margin-top: 5px
-      overflow: hidden
-      padding: 0
-      &.communities
-        img
-          +float('left')
-          margin-right: 10px
-        li
-          margin-bottom: 30px
-      &.posts
-        margin-top: 20px
-        li
-          margin-bottom: 30px
-
-
-    .community
-      .header
-        height: auto
-        img
-          margin-right: 10px
-          +float('left')
-      .body
-        margin-top: 10px
-        +column($content-columns)
-
-    .description
-      color: #999999
-      font-size: 12px
-    .message
-      margin-top: 100px
-    .post
-      margin-bottom: 15px
-      h4
-        color: $header-color
-        margin-bottom: 5px
-      .info
-        color: #999999
-        font:
-          size: 12px
-          style: italic
-        a
-          color: #999999
-      .content
-        margin-top: 5px
-        font:
-          size: 14px
-        p
-          margin-bottom: 0.5em
-    .highlight
-      background: #F9FADE
-    .profile
-      +column($content-columns)
-      .dashboard
-        height: 100px
-        margin-bottom: 10px
-        .avatar
-          margin-right: 10px
-          +float('left')
-      .info
-        +clearfix
+    +column(20, true)
 
   #sidebar
-    $sidebar-columns: floor($blueprint-grid-columns / 5)
-    +column($sidebar-columns)
+    +float('left')
+    +column(4)
 
-  .serif
-    font-family: Georgia, serif
+    .navigation
+      font-size: 0.9em
+      ul
+        list-style: none
+        margin: 0
+        padding: 0
+        li ul li
+          margin-left: 0.5em
 
