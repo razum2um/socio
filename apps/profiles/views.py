@@ -10,7 +10,7 @@ from openteam.shortcuts import redirect_to_view, get_object_or_none
 from openteam.utils import send_email
 
 from forms import SignUpForm, UserForm, UserProfileForm
-from models import UserProfile
+from models import UserProfile, PhotoAlbum
 
 @render_to("profiles/sign_up.html")
 def sign_up(request):
@@ -86,8 +86,17 @@ def show(request, id):
     )
 
 @render_to("profiles/photos.html")
-def photos(request, id):
-    return {}
+def photoalbums(request, id):
+    owner = get_object_or_404(User, id=id)
+    albums = PhotoAlbum.objects.filter(user = owner)
+    return dict(
+        owner = owner,
+        albums = albums,
+        current_page = dict(
+            title = u'Фотоальбомы',
+            slug  = 'photoalbums',
+        ),
+    )
 
 
 @login_required

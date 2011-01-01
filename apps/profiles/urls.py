@@ -27,6 +27,11 @@ urlpatterns = patterns('profiles.views',
         view  = 'edit',
         name  = 'edit_profile',
     ),
+    url (
+        regex = r'^(?P<id>\d+)/photoalbums/$',
+        view  = 'photoalbums',
+        name  = 'photoalbums',
+    )
 #    url(
 #        regex = r'^(?P<id>\d+)/delete/$',
 #        view  = 'delete',

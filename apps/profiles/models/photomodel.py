@@ -3,10 +3,18 @@ from django.contrib.auth.models import User
 from django.db import models
 from helpers import user_upload_to
 from openteam.models import NameModel, TimestampModel
-
+from openteam.shortcuts import get_object_or_none
 
 class PhotoAlbum (NameModel, TimestampModel):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, related_name='photoalbums')
+
+    @property
+    def cover (self):
+        return get_object_or_none(Photo, album=self)
+
+    @property
+    def random (self):
+        return self.photos.order_by('?')
 
     class Meta:
         app_label = 'profiles'
@@ -14,7 +22,7 @@ class PhotoAlbum (NameModel, TimestampModel):
 
 
 class Photo (TimestampModel):
-    album = models.ForeignKey(PhotoAlbum)
+    album = models.ForeignKey(PhotoAlbum, related_name='photos')
     photo = models.ImageField(upload_to=user_upload_to)
     is_cover = models.BooleanField(default=False)
     description = models.TextField(null=True, blank=True)

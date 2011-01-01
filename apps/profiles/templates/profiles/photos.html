@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% load thumbnail %}
+{% block content %}
+<div class="profile">
+    {% include "profiles/dashboard.html" %}
+    {% if albums.count %}
+        <ul>
+        {% for album in albums %}
+            {% thumbnail album.cover "100x100" as cover %}
+                <img src="{{ cover.url }}" alt="{{ cover.description }}"
+                    height="{{ cover.height }}" width="{{ cover.width }}" />
+            {% empty %}
+                {% thumbnail album.random "100x100" as random %}
+                    <img src="{{ random.url }}" alt="{{ cover.random }}"
+                        height="{{ random.height }}" width="{{ random.width }}" />
+                {% empty %}
+                    <img src="{{ IMG_URL }}pho_empty" alt="Фотографий нет"
+                         height="100" width="100" />
+                {% endthumbnail %}
+            {% endthumbnail %}
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Нет ни одного фотоальбома. Давайте <a href="#" title="создать фотоальбом">создадим парочку?</a></p>
+    {% endif %}
+</div>
+{% endblock content %}
