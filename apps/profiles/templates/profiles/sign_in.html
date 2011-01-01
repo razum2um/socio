@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% load helpers %}
 {% block title %}Вход на сайт{% endblock %}
 {% block sidebar %}
 {% endblock sidebar %}
@@ -7,7 +8,7 @@
   <form method="post" action="{% url sign_in %}" class="bp">
   {% csrf_token %}
   {{ form.as_p }}
-  <p><input type="submit" value="войти"/> | <a href="{% url password_reset %}">забыли пароль?</a> </p>
+  <p>{% submit_tag "войти" %}| <a href="{% url password_reset %}">забыли пароль?</a> </p>
   </form>
 {% endblock content %}
 

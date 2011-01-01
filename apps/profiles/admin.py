@@ -3,6 +3,6 @@ from django.contrib import admin
 from models import UserProfile
 
 class ProfileAdmin(admin.ModelAdmin):
-    fields = ('user', 'avatar', 'sex', 'birth_date', 'show_bd', 'summary')
+    fields = ('user', 'sex', 'birth_date',)
 
 admin.site.register(UserProfile, ProfileAdmin)

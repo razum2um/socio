@@ -18,17 +18,28 @@
       {% endif %}
     </h2>
     <div class="navigation">
-      <a href="#">Досье</a>
-      <a href="#">Фотографии</a>
-      <a href="#">Вопросы</a>
-      <a href="#">Индивидуальность</a>
+        {% if current_page.slug == 'dossier' %}Досье{% else %}<a href="{% url profile id=user.id %}">Досье</a>{% endif %}
+        {% if current_page.slug == 'photos' %}Фотографии{% else %}<a href="#">Фотографии</a>{% endif %}
+        {% if current_page.slug == 'questions' %}Вопросы{% else %}<a href="#">Вопросы</a>{% endif %}
+        {% if current_page.slug == 'personality' %}Индивидуальность{% else %}<a href="#">Индивидуальность</a>{% endif %}
     </div>
   </div>
   <div class="info">
-    <p>С нами с {{ owner.date_joined|date:"d.m.Y" }}
-    {% if owner.get_profile.description%}
-    <p>{{ owner.get_profile.description }}</p>
-    {% endif %}
+    <p>С нами с {{ owner.date_joined|date:"d.m.Y" }}</p>
+    <span class="attr-name">О себе:{% if user.id == owner.id %} <a href="#">edit</a>{% endif %}</span>
+      {% if owner.get_profile.summary %}
+        <p>{{ owner.get_profile.summary }}</p>
+      {% else %}
+        <p><em>информацию о себе еще предстоит заполнить</em></p>
+      {% endif %}
+  {% for attr in owner.get_profile.attributes.all %}
+      <span class="attr-name">{{ attr.name }}{% if user.id == owner.id %} <a href="#">edit</a>{% endif %}</span>
+      {% if attr.value %}
+      <p>{{ attr.value }}</p>
+      {% else %}
+      <p><em>{{ attr.empty_text }}</em></p>
+      {% endif %}
+  {% endfor %}
   </div>
 </div>
 {% endblock content %}

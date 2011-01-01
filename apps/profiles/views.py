@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 
@@ -9,7 +9,7 @@ from openteam.decorators import render_to
 from openteam.shortcuts import redirect_to_view, get_object_or_none
 from openteam.utils import send_email
 
-from forms import SignUpForm, SignInForm, UserForm, UserProfileForm
+from forms import SignUpForm, UserForm, UserProfileForm
 from models import UserProfile
 
 @render_to("profiles/sign_up.html")
@@ -77,9 +77,17 @@ def show(request, id):
     if get_object_or_none(UserProfile, user=owner) is None:
         UserProfile.objects.create(user=owner)
 
-    return {
-        'owner': owner,
-    }
+    return dict(
+        owner = owner,
+        current_page = dict(
+           title = u'Профиль',
+            slug = 'dossier'
+        ),
+    )
+
+@render_to("profiles/photos.html")
+def photos(request, id):
+    return {}
 
 
 @login_required

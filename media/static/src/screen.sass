@@ -68,7 +68,10 @@ form.bp
       height: 100px
 
   .submit
-    +fancy-button(#276201)
+    +fancy-button(#59ac03)
+    text-shadow: #326400 0px -1px 0px
+    font-weight: normal
+    border: solid 1px #54a800
 
 body.two-col
   #container
@@ -87,6 +90,12 @@ body.two-col
 
   #content
     +column(20, true)
+    .profile
+      .info
+        span.attr-name
+          +column(20, true)
+          display: block
+          +float('left')
 
   #sidebar
     +float('left')
