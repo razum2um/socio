@@ -54,11 +54,10 @@ def edit(request, id):
     user_form = UserForm(request.POST or None, instance=owner, prefix='user_')
     profile_form = UserProfileForm(request.POST or None, request.FILES or None, instance=profile, prefix='profile_')
 
-    if user_form.is_valid():
+    if user_form.is_valid() and profile_form.is_valid():
         user_form.save()
-
-    if profile_form.is_valid():
         profile_form.save()
+        return redirect_to_view('profile', id=owner.id)
 
     return {
         'profile_form': profile_form,

@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
 from datetime import date
+
+from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
 
 from helpers import O_CHOICES_M, MS_CHOICES_M, SEX_CHOICES, user_upload_to
+
+import json
 
 class UserProfile (models.Model):
     user        = models.OneToOneField(User)
@@ -28,46 +32,20 @@ class UserProfile (models.Model):
     @property
     def age(self):
         today = date.today()
-        years = today.year - self.birth_date.year
-        age = years - int(today.timetuple()[1:] < self.birth_date.timetuple()[1:])
-        return age
+        age = today - self.birth_date
+        return int(age.days/365.25)
 
 
 def initialize_attributes_set(instance, **kwargs):
     if kwargs['created']:
-        instance.attributes.create(name=u'Вкратце, обо мне',
-                                   empty_text = u'нужно придумать текст если поле пустое',
-                                   sort_order=5)
-        instance.attributes.create(name=u'Чем я занимаюсь в жизни?',
-                                   empty_text = u'нужно придумать текст если поле пустое',
-                                   sort_order=10)
-        instance.attributes.create(name=u'У меня неплохо получается...',
-                                   empty_text = u'нужно придумать текст если поле пустое',
-                                   sort_order=20)
-        instance.attributes.create(name=u'Первое, что люди замечают обо мне',
-                                   empty_text = u'нужно придумать текст если поле пустое',
-                                   sort_order=30)
-        instance.attributes.create(name=u'Мои любимые книги',
-                                   empty_text = u'нужно придумать текст если поле пустое',
-                                   sort_order=40)
-        instance.attributes.create(name=u'Мои любимые фильмы',
-                                   empty_text = u'нужно придумать текст если поле пустое',
-                                   sort_order=50)
-        instance.attributes.create(name=u'Моя любимая музыка',
-                                   empty_text = u'нужно придумать текст если поле пустое',
-                                   sort_order=60)
-        instance.attributes.create(name=u'Шесть вещей которые всегда со мной',
-                                   empty_text = u'нужно придумать текст если поле пустое',
-                                   sort_order=70)
-        instance.attributes.create(name=u'Я провожу много времени думая о..',
-                                   empty_text = u'нужно придумать текст если поле пустое',
-                                   sort_order=80)
-        instance.attributes.create(name=u'В пятницу я обычно...',
-                                   empty_text = u'нужно придумать текст если поле пустое',
-                                   sort_order=90)
-        instance.attributes.create(name=u'Пиши мне если...',
-                                   empty_text = u'нужно придумать текст если поле пустое',
-                                   sort_order=100)
+        with open(settings.PROFILE_INITIAL_ATTRIBUTES,'r') as fp:
+            data = json.load(fp)
+            for line in data:
+                print line
+                instance.attributes.create(
+                        name       = line['name'],
+                        empty_text = line['empty_text'],
+                        sort_order = line['sort_order']
+                        )
 
 models.signals.post_save.connect(initialize_attributes_set, UserProfile)
-
