@@ -37,6 +37,16 @@ urlpatterns = patterns('profiles.views',
         view  = 'ajax.attribute',
         name  = 'profile_attribute',
     ),
+    url(
+        regex = r'^(?P<id>\d+)/photoalbums/add/$',
+        view  = 'profile.add_photoalbum',
+        name  = 'add_photoalbum',
+    ),
+    url (
+        regex = r'^(?P<id>\d+)/photoalbums/(?P<album_id>\d+)/$',
+        view  = 'profile.show_photoalbum',
+        name  = 'show_photoalbum',
+    )
 #    url(
 #        regex = r'^(?P<id>\d+)/delete/$',
 #        view  = 'delete',

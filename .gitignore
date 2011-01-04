@@ -6,3 +6,6 @@ local_settings.py
 media/uploads
 media/thumbnails
 media/cache
+*.swp
+src
+
