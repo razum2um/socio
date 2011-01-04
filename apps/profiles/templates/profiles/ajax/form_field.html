@@ -1,0 +1,9 @@
+<form action="{% url profile_attribute attr_id=attr_id %}" id="form_{{ attr_id }}">
+{% csrf_token %}
+<ul>
+{% for field in form %}
+    <li>{{ field }}</li>
+{% endfor %}
+    <li><a href="#">Отменить</a><a href="#" onclick="Profile.toggleSave('form_{{ attr_id }}'); return false;" >Сохранить</a></li>
+</ul>
+</form>

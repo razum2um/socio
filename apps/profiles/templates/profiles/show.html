@@ -2,6 +2,29 @@
 {% load thumbnail %}
 {% block title %}Профиль пользователя {{ owner }}{% endblock %}
 {% block content %}
+    <script type="text/javascript">
+    var Profile;
+    (function($){
+        Profile = {
+            toggleEdit: function(id, url) {
+                var subject = $('#'+id);
+                var subject_html = $(subject).html();
+                $.getJSON(url, function(data, textStatus){
+                    if (textStatus == 'success') {
+                        $('#'+id).html(data.html);
+                        
+                    }
+                });
+            },
+            toggleSave: function(id) {
+                var form = $('#'+id);
+
+                console.log(id);
+            }
+        };
+    })(jQuery);
+
+    </script>
 <div class="profile">
   {% include "profiles/dashboard.html" %}
   <div class="info">
@@ -13,11 +36,15 @@
         <p><em>информацию о себе еще предстоит заполнить</em></p>
       {% endif %}
   {% for attr in owner.get_profile.attributes.all %}
-      <span class="attr-name">{{ attr.name }}{% if user.id == owner.id %} <a href="#">edit</a>{% endif %}</span>
+      <span class="attr-name">{{ attr.name }}
+          {% if user.id == owner.id %}
+              <a href="#" onclick="Profile.toggleEdit('text_{{ forloop.counter }}','{% url profile_attribute attr_id=attr.id %}'); return false;">edit</a>
+          {% endif %}
+      </span>
       {% if attr.value %}
-      <p>{{ attr.value }}</p>
+      <p id="text_{{ forloop.counter }}">{{ attr.value }}</p>
       {% else %}
-      <p><em>{{ attr.empty_text }}</em></p>
+      <p id="text_{{ forloop.counter }}" class="empty"><em>{{ attr.empty_text }}</em></p>
       {% endif %}
   {% endfor %}
   </div>
