@@ -31,6 +31,16 @@ urlpatterns = patterns('profiles.views',
         regex = r'^(?P<id>\d+)/photoalbums/$',
         view  = 'profile.photoalbums',
         name  = 'photoalbums',
+    ),
+    url (
+        regex = r'^(?P<id>\d+)/photoalbums/add/$',
+        view  = 'profile.add_photoalbum',
+        name  = 'add_photoalbum',
+    ),
+    url (
+        regex = r'^(?P<id>\d+)/photoalbums/(?P<album_id>\d+)/$',
+        view  = 'profile.show_photoalbum',
+        name  = 'show_photoalbum',
     )
 #    url(
 #        regex = r'^(?P<id>\d+)/delete/$',

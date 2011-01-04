@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="profile">
+    {% include "profiles/dashboard.html" %}
+    <form action='.' method='POST'>
+        {{ album_form }}
+        {% csrf_token %}
+        <input type='submit' value='Создать альбом' />
+    </form>
+</div>
+{% endblock content %}

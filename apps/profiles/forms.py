@@ -2,7 +2,7 @@
 from django import forms
 from django.contrib.auth.models import User
 
-from models import UserProfile
+from models import UserProfile, PhotoAlbum
 
 class SignUpForm (forms.Form):
 
@@ -28,3 +28,8 @@ class UserProfileForm (forms.ModelForm):
         exclude = ['user']
         model  = UserProfile
 
+class PhotoAlbumForm (forms.ModelForm):
+
+    class Meta:
+        exclude = ['user', 'created_at', 'updated_at']
+        model = PhotoAlbum

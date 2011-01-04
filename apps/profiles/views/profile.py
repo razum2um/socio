@@ -8,7 +8,7 @@ from openteam.decorators import render_to
 from openteam.shortcuts import redirect_to_view, get_object_or_none
 from openteam.utils import send_email
 
-from profiles.forms import UserForm, UserProfileForm
+from profiles.forms import UserForm, UserProfileForm, PhotoAlbumForm
 from profiles.models import UserProfile, PhotoAlbum
 
 @login_required
@@ -26,6 +26,41 @@ def show(request, id):
             slug = 'dossier'
         ),
     )
+
+@login_required
+@render_to("profiles/show_photoalbum.html")
+def show_photoalbum(request, id, album_id):
+    owner = get_object_or_404(User, id=id)
+    album = get_object_or_404(PhotoAlbum, id=album_id)
+
+    return dict(
+        owner = owner,
+        album = album,
+        current_page = dict(
+            title = u'Альбом: %(name)s' % {'name': album.name},
+            ),
+        )
+
+@login_required
+@render_to("profiles/add_photoalbum.html")
+def add_photoalbum(request, id):
+    owner = get_object_or_404(User, id=id)
+    album_form = PhotoAlbumForm(request.POST or None)
+
+    if album_form.is_valid():
+        album = album_form.save(commit=False)
+        album.user = owner
+        album.save()
+
+        return redirect_to_view('show_photoalbum', id=owner.id, album_id=album.id)
+
+    return dict(
+        owner = owner,
+        album_form = album_form,
+        current_page = dict(
+            title = u'Добавить альбом'
+            ),
+        )
 
 @login_required
 @render_to("profiles/photos.html")
