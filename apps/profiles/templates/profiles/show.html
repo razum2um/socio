@@ -2,29 +2,31 @@
 {% load thumbnail %}
 {% block title %}Профиль пользователя {{ owner }}{% endblock %}
 {% block content %}
-    <script type="text/javascript">
-    var Profile;
-    (function($){
-        Profile = {
-            toggleEdit: function(id, url) {
-                var subject = $('#'+id);
-                var subject_html = $(subject).html();
-                $.getJSON(url, function(data, textStatus){
-                    if (textStatus == 'success') {
-                        $('#'+id).html(data.html);
-                        
-                    }
-                });
-            },
-            toggleSave: function(id) {
-                var form = $('#'+id);
+<script type="text/javascript">
+  var Profile;
+  (function($){
+    Profile = {
 
-                console.log(id);
-            }
-        };
-    })(jQuery);
+      toggleEdit: function(id, url) {
+        $.getJSON(url, function(data, textStatus){
+          if (textStatus == 'success') {
+            $('#text_'+id).html(data.html);
+          }
+        });
+      },
 
-    </script>
+      toggleSave: function(id) {
+        var form = $('#form_'+id);
+        $.post($(form).attr('action'),$(form).serialize(),function(data, textStatus) {
+          if (textStatus == 'success') {
+            $('#text_'+id).html(data.html);
+          }
+        }, 'json');
+      }
+
+    };
+  })(jQuery);
+</script>
 <div class="profile">
   {% include "profiles/dashboard.html" %}
   <div class="info">
@@ -38,13 +40,13 @@
   {% for attr in owner.get_profile.attributes.all %}
       <span class="attr-name">{{ attr.name }}
           {% if user.id == owner.id %}
-              <a href="#" onclick="Profile.toggleEdit('text_{{ forloop.counter }}','{% url profile_attribute attr_id=attr.id %}'); return false;">edit</a>
+              <a href="#" onclick="Profile.toggleEdit('{{ attr.id }}','{% url profile_attribute attr_id=attr.id %}'); return false;">edit</a>
           {% endif %}
       </span>
       {% if attr.value %}
-      <p id="text_{{ forloop.counter }}">{{ attr.value }}</p>
+      <p id="text_{{ attr.id }}">{{ attr.value }}</p>
       {% else %}
-      <p id="text_{{ forloop.counter }}" class="empty"><em>{{ attr.empty_text }}</em></p>
+      <p id="text_{{ attr.id }}" class="empty"><em>{{ attr.empty_text }}</em></p>
       {% endif %}
   {% endfor %}
   </div>

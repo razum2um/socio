@@ -29,18 +29,18 @@ def attribute(request, attr_id):
         attribute_form = ProfileAttributeForm(request.POST or None, instance=attribute)
 
         if attribute_form.is_valid():
-            attribute_form.save()
-            attribute.reload()
-            return json_response(dict(data=attribute))
+            attribute = attribute_form.save()
+            return json_response(dict(html=attribute.value))
 
         html_form = render_to_string(
                 template_name    = 'profiles/ajax/form_field.html',
                 dictionary       = dict(form=attribute_form, attr_id=attr_id),
                 context_instance = RequestContext(request))
-        
+
         return json_response(dict(
                 html = html_form,
                 ))
 
     else:
         raise Http404
+

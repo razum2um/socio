@@ -4,6 +4,7 @@
 {% for field in form %}
     <li>{{ field }}</li>
 {% endfor %}
-    <li><a href="#">Отменить</a><a href="#" onclick="Profile.toggleSave('form_{{ attr_id }}'); return false;" >Сохранить</a></li>
+    <li><a href="#">Отменить</a><a href="#" onclick="Profile.toggleSave('{{ attr_id }}'); return false;" >Сохранить</a></li>
 </ul>
 </form>
+
