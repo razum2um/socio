@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from datetime import date
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -21,6 +22,19 @@ class UserProfile (models.Model):
             return self.user.first_name
         else:
             return self.user.username
+
+    @property
+    def age(self):
+        today = date.today()
+        years = today.years - self.birth_date.years
+
+        if all((x >= y) for x, y in zip(today.timetuple(), self.birth_date.timetuple())):
+            age = years
+
+        else:
+            age = years - 1
+
+        return age
 
 
 def initialize_attributes_set(instance, **kwargs):
@@ -60,3 +74,4 @@ def initialize_attributes_set(instance, **kwargs):
                                    sort_order=100)
 
 models.signals.post_save.connect(initialize_attributes_set, UserProfile)
+

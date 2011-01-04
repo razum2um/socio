@@ -9,27 +9,27 @@ urlpatterns = patterns('profiles.views',
 #    ),
     url(
         regex = r'^(?P<id>\d+)/$',
-        view  = 'show',
+        view  = 'profile.show',
         name  = 'profile',
     ),
     url(
         regex = r'^signup/$',
-        view  = 'sign_up',
+        view  = 'auth.sign_up',
         name  = 'sign_up',
     ),
     url(
         regex = r'^signout/$',
-        view  = 'sign_out',
+        view  = 'auth.sign_out',
         name  = 'sign_out',
     ),
     url(
         regex = r'^(?P<id>\d+)/edit/$',
-        view  = 'edit',
+        view  = 'profile.edit',
         name  = 'edit_profile',
     ),
     url (
         regex = r'^(?P<id>\d+)/photoalbums/$',
-        view  = 'photoalbums',
+        view  = 'profile.photoalbums',
         name  = 'photoalbums',
     )
 #    url(

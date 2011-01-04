@@ -1,10 +1,14 @@
 {% load thumbnail %}
-<div class="dashboard">
+<div id="dashboard">
+  <div id="general-info">
     {% thumbnail owner.get_profile.avatar "100x100" as avatar %}
     <img src="{{ avatar.url }}" alt="{{ owner.get_profile.name }}" class="avatar"/>
     {% empty %}
     <img src="{{ IMG_URL }}av_empty.png" alt="{{ owner.get_profile.name }}" width="48" height="48" class="avatar"/>
     {% endthumbnail %}
+    <div id="summary">
+      {{ owner.get_profile. }}
+    </div>
     <h2>
       {{ owner.get_full_name }}
       {% if user == owner or user.is_superuser %}
@@ -13,18 +17,20 @@
       </sup>
       {% endif %}
     </h2>
-    <div class="navigation">
-        {% if current_page.slug == 'dossier' %}
-            Досье
-        {% else %}
-            <a href="{% url profile id=owner.id %}">Досье</a>
-        {% endif %}
-        {% if current_page.slug == 'photoalbums' %}
-            Фотографии
-        {% else %}
-            <a href="{% url photoalbums id=owner.id %}">Фотографии</a>
-        {% endif %}
-        {% if current_page.slug == 'questions' %}Вопросы{% else %}<a href="#">Вопросы</a>{% endif %}
-        {% if current_page.slug == 'personality' %}Индивидуальность{% else %}<a href="#">Индивидуальность</a>{% endif %}
-    </div>
+  </div>
+  <div id="profile-navigation">
+    {% if current_page.slug == 'dossier' %}
+      Досье
+    {% else %}
+      <a href="{% url profile id=owner.id %}">Досье</a>
+    {% endif %}
+    {% if current_page.slug == 'photoalbums' %}
+      Фотографии
+    {% else %}
+      <a href="{% url photoalbums id=owner.id %}">Фотографии</a>
+    {% endif %}
+    {% if current_page.slug == 'questions' %}Вопросы{% else %}<a href="#">Вопросы</a>{% endif %}
+    {% if current_page.slug == 'personality' %}Индивидуальность{% else %}<a href="#">Индивидуальность</a>{% endif %}
+  </div>
 </div>
+

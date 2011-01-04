@@ -18,7 +18,7 @@
   {% with profile_form as form %}
     {% include "form.html" %}
   {% endwith %}
-  <p>{% submit_tag 'сохранить' %}</p>
+  <p class="actions">&larr;&nbsp;<a href="{% url profile id=owner.id %}">Назад</a>{% submit_tag 'сохранить' %}</p>
 </form>
 {% endblock content %}
 
