@@ -1,32 +1,13 @@
 {% extends "layout.html" %}
 {% load thumbnail %}
 {% block title %}Профиль пользователя {{ owner }}{% endblock %}
+
+{% block script %}
+  {{ block.super }}
+  <script type="text/javascript" src="{{ JS_URL }}profile_attributes.js"></script>
+{% endblock script %}
+
 {% block content %}
-<script type="text/javascript">
-  var Profile;
-  (function($){
-    Profile = {
-
-      toggleEdit: function(id, url) {
-        $.getJSON(url, function(data, textStatus){
-          if (textStatus == 'success') {
-            $('#text_'+id).html(data.html);
-          }
-        });
-      },
-
-      toggleSave: function(id) {
-        var form = $('#form_'+id);
-        $.post($(form).attr('action'),$(form).serialize(),function(data, textStatus) {
-          if (textStatus == 'success') {
-            $('#text_'+id).html(data.html);
-          }
-        }, 'json');
-      }
-
-    };
-  })(jQuery);
-</script>
 <div class="profile">
   {% include "profiles/dashboard.html" %}
   <div class="info">
