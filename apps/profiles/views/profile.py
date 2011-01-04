@@ -2,6 +2,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404
 
 from openteam.decorators import render_to
@@ -45,6 +46,12 @@ def show_photoalbum(request, id, album_id):
 @render_to("profiles/add_photoalbum.html")
 def add_photoalbum(request, id):
     owner = get_object_or_404(User, id=id)
+    # take a look at http://djangosnippets.org/snippets/874/ plz
+    # ... user._meta.get_all_related_objects() ... 
+    # too expensive for a deco to use with every user's staff?
+    if request.user != owner:
+        return HttpResponseForbidden('Take care of *your* account, please') 
+
     album_form = PhotoAlbumForm(request.POST or None)
 
     if album_form.is_valid():

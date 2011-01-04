@@ -21,7 +21,11 @@
         {% endfor %}
         </ul>
     {% else %}
-        <p>Нет ни одного фотоальбома. Давайте <a href="{% url add_photoalbum id=request.user.id %}" title="создать фотоальбом">создадим парочку?</a></p>
+        {% if owner == request.user %}
+            <p>Нет ни одного фотоальбома. Давайте <a href="{% url add_photoalbum id=request.user.id %}" title="создать фотоальбом">создадим парочку?</a></p>
+        {% else %}
+            <p>У пользователя нет альбомов</p>
+        {% endif %}
     {% endif %}
 </div>
 {% endblock content %}
