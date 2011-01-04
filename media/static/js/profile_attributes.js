@@ -1,22 +1,37 @@
 var Profile;
 (function($){
+
+    $('a.attr-edit-link').live('click', function() {
+        $(this).css('display', 'none');
+    });
+
     Profile = {
 
-        toggleEdit: function(id, url) {
+        edit: function(id, url) {
             $.getJSON(url, function(data, textStatus){
                 if (textStatus == 'success') {
-                    $('#text_'+id).html(data.html);
+                    $('#attr_'+id+'>p.text').after(data.html);
+                    $('#attr_'+id+'>p.text').css('display','none');
                 }
             });
         },
 
-        toggleSave: function(id) {
-            var form = $('#form_'+id);
+        save: function(id) {
+            var form = $('#attr_'+id+' .form');
             $.post($(form).attr('action'), $(form).serialize(), function(data, textStatus) {
                 if (textStatus == 'success') {
-                    $('#text_'+id).html(data.html);
+                    $(form).remove();
+                    $('#attr_'+id+'>p.text').html(data.html);
+                    $('#attr_'+id+'>p.text').css('display','');
+                    $('a.attr-edit-link').css('display','');
                 }
             }, 'json');
+        },
+
+        cancel: function(id) {
+            $('#attr_'+id+' .form').remove();
+            $('a.attr-edit-link').css('display','');
+            $('#attr_'+id+'>p.text').css('display','');
         }
 
     };

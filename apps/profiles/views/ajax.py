@@ -37,9 +37,7 @@ def attribute(request, attr_id):
                 dictionary       = dict(form=attribute_form, attr_id=attr_id),
                 context_instance = RequestContext(request))
 
-        return json_response(dict(
-                html = html_form,
-                ))
+        return json_response(dict(html=html_form))
 
     else:
         raise Http404
