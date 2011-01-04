@@ -29,13 +29,7 @@ class UserProfile (models.Model):
     def age(self):
         today = date.today()
         years = today.year - self.birth_date.year
-
-        if all((x >= y) for x, y in zip(today.timetuple(), self.birth_date.timetuple())):
-            age = years
-
-        else:
-            age = years - 1
-
+        age = years - int(today.timetuple()[1:] < self.birth_date.timetuple()[1:])
         return age
 
 
