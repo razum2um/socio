@@ -14,6 +14,43 @@ SEX_CHOICES = (
     (S_FEMALE, u'женский'),
 )
 
+MS_UNDEF = 0
+MS_SINGLE = 1
+MS_DATING = 2
+MS_INVOLVED = 3
+MS_MARRIED = 4
+
+MS_CHOICES_M = (
+    (MS_UNDEF, u'не выбрано'),
+    (MS_SINGLE, u'один'),
+    (MS_DATING, u'встречаюсь'),
+    (MS_INVOLVED, u'помолвлен'),
+    (MS_MARRIED, u'женат'),
+)
+
+MS_CHOICES_F = (
+    (MS_UNDEF, u'не выбрано'),
+    (MS_SINGLE, u'одна'),
+    (MS_DATING, u'встречаюсь'),
+    (MS_INVOLVED, u'помолвлена'),
+    (MS_MARRIED, u'замужем'),
+)
+
+O_STRAIGHT = 0
+O_GAY = 1
+O_BISEXUAL = 2
+
+O_CHOICES_M = (
+    (O_STRAIGHT, u'гетеро'),
+    (O_GAY, u'гей'),
+    (O_BISEXUAL, u'би'),
+)
+
+O_CHOICES_F = (
+    (O_STRAIGHT, u'гетеро'),
+    (O_GAY, u'лесби'),
+    (O_BISEXUAL, u'би'),
+)
 
 def user_upload_to(instance, filename):
     today = datetime.today()
@@ -29,3 +66,4 @@ def user_upload_to(instance, filename):
             'ext': os.path.splitext(filename)[-1]
         }
     return path
+

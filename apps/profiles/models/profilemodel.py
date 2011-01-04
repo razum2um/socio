@@ -3,12 +3,14 @@ from datetime import date
 from django.db import models
 from django.contrib.auth.models import User
 
-from helpers import SEX_CHOICES, user_upload_to
+from helpers import O_CHOICES_M, MS_CHOICES_M, SEX_CHOICES, user_upload_to
 
 class UserProfile (models.Model):
     user        = models.OneToOneField(User)
     sex         = models.IntegerField(u'пол', default=0, choices=SEX_CHOICES)
     birth_date  = models.DateField(u'дата рождения', null=True, blank=True)
+    marital_status = models.IntegerField(u'семейное положение', default=0, choices=MS_CHOICES_M)
+    orientation = models.IntegerField(u'ориентация', default=0, choices=O_CHOICES_M)
 
     class Meta:
         app_label = 'profiles'
@@ -26,7 +28,7 @@ class UserProfile (models.Model):
     @property
     def age(self):
         today = date.today()
-        years = today.years - self.birth_date.years
+        years = today.year - self.birth_date.year
 
         if all((x >= y) for x, y in zip(today.timetuple(), self.birth_date.timetuple())):
             age = years
