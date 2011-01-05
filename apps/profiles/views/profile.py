@@ -9,7 +9,7 @@ from openteam.decorators import render_to
 from openteam.shortcuts import redirect_to_view, get_object_or_none
 from openteam.utils import send_email
 
-from profiles.forms import UserForm, UserProfileForm, PhotoAlbumForm
+from profiles.forms import UserForm, UserProfileForm, PhotoAlbumForm, PhotoForm
 from profiles.models import UserProfile, PhotoAlbum
 
 @login_required
@@ -34,13 +34,27 @@ def show_photoalbum(request, id, album_id):
     owner = get_object_or_404(User, id=id)
     album = get_object_or_404(PhotoAlbum, id=album_id)
 
-    return dict(
+    response = dict(
         owner = owner,
         album = album,
         current_page = dict(
             title = u'Альбом: %(name)s' % {'name': album.name},
             ),
         )
+
+    if request.user == owner:
+        photo_form = PhotoForm(request.POST or None, request.FILES or None)
+        
+        if photo_form.is_valid():
+            photo = photo_form.save(commit=False)
+            photo.album = album
+            photo.user = owner
+            photo.save()
+            raise
+
+        response.update({'photo_form': photo_form})
+
+    return response
 
 @login_required
 @render_to("profiles/add_photoalbum.html")

@@ -1,7 +1,46 @@
 {% extends "layout.html" %}
 {% load thumbnail %}
+
+{% block spec_head %}
+<script type='text/javascript'>
+</script>
+{% endblock spec_head %}
+
 {% block content %}
 <div class="profile">
     {% include "profiles/dashboard.html" %}
+    {% with album.photos.all as photos %}
+        {% if photos.count %}
+            {% for photo in photos %}
+            <div class='photo' style='clear:left' >
+                {% thumbnail photo.photo "100x100" as img %}
+                <img src="{{ img.url }}" alt="{{ img.url }}" style='float:left'
+                    height="{{ img.height}}" width={{ img.width }}" />
+                {% endthumbnail %}
+                <div class='info'>
+                    <p>{{ photo.description }}</p>
+                    {% if request.user == owner %}
+                        <a href='#'>Сделать обложкой</a>
+                    {% endif %}
+                </div>
+                {% empty %}
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>В альбоме еще нет фотографий</p>
+        {% endif %}
+    {% endwith %}
+    </div>
+
+    {% if request.user == owner %}
+    <div id='upload'>
+    <p>Вы можете добавить фотографию</p>
+    <form action='.' method='POST' enctype="multipart/form-data">
+        {{ photo_form.as_p }}
+        {% csrf_token %}
+        <input type='submit' value='Добавить фото' />
+    </form>
+    </div>
+    {% endif %}
 </div>
 {% endblock content %}
