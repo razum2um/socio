@@ -50,7 +50,6 @@ def show_photoalbum(request, id, album_id):
             photo.album = album
             photo.user = owner
             photo.save()
-            raise
 
         response.update({'photo_form': photo_form})
 

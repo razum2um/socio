@@ -5,7 +5,7 @@
 {{ script.super }}
 <script type='text/javascript'>
 </script>
-{% endblock spec_head %}
+{% endblock script %}
 
 {% block content %}
 <div class="profile">
@@ -34,7 +34,7 @@
     </div>
 
     {% if request.user == owner %}
-    <div id='upload'>
+    <div id='upload' style='clear:both'>
     <p>Вы можете добавить фотографию</p>
     <form action='.' method='POST' enctype="multipart/form-data">
         {{ photo_form.as_p }}
