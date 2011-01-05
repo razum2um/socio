@@ -1,0 +1,10 @@
+<form action="{% url profile_attribute attr_id=attr_id %}" class="form">
+{% csrf_token %}
+<ul>
+{% for field in form %}
+    <li>{{ field }}</li>
+{% endfor %}
+    <li><a href="#" onclick="Profile.cancel('{{ attr_id }}'); return false;">Отменить</a> | <a href="#" onclick="Profile.save('{{ attr_id }}'); return false;" >Сохранить</a></li>
+</ul>
+</form>
+

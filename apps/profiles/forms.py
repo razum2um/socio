@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 from django import forms
 from django.contrib.auth.models import User
-
-from models import UserProfile, PhotoAlbum, Photo
+from models import UserProfile, PhotoAlbum, Photo, ProfileAttribute
 
 class SignUpForm (forms.Form):
 
@@ -27,6 +26,14 @@ class UserProfileForm (forms.ModelForm):
     class Meta:
         exclude = ['user']
         model  = UserProfile
+
+        
+class ProfileAttributeForm (forms.ModelForm):
+
+    class Meta:
+        fields = ['value']
+        model = ProfileAttribute
+
 
 class PhotoAlbumForm (forms.ModelForm):
 

@@ -1,6 +1,12 @@
 {% extends "layout.html" %}
 {% load thumbnail %}
 {% block title %}Профиль пользователя {{ owner }}{% endblock %}
+
+{% block script %}
+  {{ block.super }}
+  <script type="text/javascript" src="{{ JS_URL }}profile_attributes.js"></script>
+{% endblock script %}
+
 {% block content %}
 <div class="profile">
   {% include "profiles/dashboard.html" %}
@@ -13,11 +19,16 @@
         <p><em>информацию о себе еще предстоит заполнить</em></p>
       {% endif %}
   {% for attr in owner.get_profile.attributes.all %}
-      <span class="attr-name">{{ attr.name }}{% if user.id == owner.id %} <a href="#">edit</a>{% endif %}</span>
+    <div id="attr_{{ attr.id }}">
+      <span class="name">{{ attr.name }}
+          {% if user.id == owner.id %}
+              <a class="attr-edit-link" href="#" onclick="Profile.edit('{{ attr.id }}','{% url profile_attribute attr_id=attr.id %}'); return false;">edit</a>
+          {% endif %}
+      </span>
       {% if attr.value %}
-      <p>{{ attr.value }}</p>
+      <p class="text">{{ attr.value }}</p>
       {% else %}
-      <p><em>{{ attr.empty_text }}</em></p>
+      <p class="text empty">{{ attr.empty_text }}</p>
       {% endif %}
   {% endfor %}
   </div>

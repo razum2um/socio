@@ -33,6 +33,11 @@ urlpatterns = patterns('profiles.views',
         name  = 'photoalbums',
     ),
     url (
+        regex = r'^ajax/attribute/(?P<attr_id>\d+)/$',
+        view  = 'ajax.attribute',
+        name  = 'profile_attribute',
+    ),
+    url(
         regex = r'^(?P<id>\d+)/photoalbums/add/$',
         view  = 'profile.add_photoalbum',
         name  = 'add_photoalbum',
