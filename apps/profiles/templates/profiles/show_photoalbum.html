@@ -2,8 +2,20 @@
 {% load thumbnail %}
 
 {% block script %}
-{{ script.super }}
+{{ block.super }}
 <script type='text/javascript'>
+    $(document).ready(function() {
+        $('#upload form p').css('display','inline').last().css('display','block');
+        $('#upload #id_description').parent().css('display','block').hide()
+            .after('<a href="#" class="commentToggle">Комментарий</a>');
+            $('.commentToggle').click( function() {
+                if ($(this).hasClass('opened')) {
+                    $(this).removeClass('opened').text('Комментарий').prev().hide();
+                } else {
+                    $(this).addClass('opened').text('Скрыть').prev().show();
+                }
+                })
+        });
 </script>
 {% endblock script %}
 
@@ -39,7 +51,7 @@
     <form action='.' method='POST' enctype="multipart/form-data">
         {{ photo_form.as_p }}
         {% csrf_token %}
-        <input type='submit' value='Добавить фото' />
+        <p><input type='submit' value='Добавить фото' /></p>
     </form>
     </div>
     {% endif %}
