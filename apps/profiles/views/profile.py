@@ -10,7 +10,8 @@ from openteam.shortcuts import redirect_to_view, get_object_or_none
 from openteam.utils import send_email
 
 from profiles.forms import UserForm, UserProfileForm, PhotoAlbumForm, PhotoForm
-from profiles.models import UserProfile, PhotoAlbum
+from profiles.models import UserProfile, PhotoAlbum, Photo
+from django.forms.models import modelformset_factory
 
 @login_required
 @render_to("profiles/show.html")
@@ -43,15 +44,17 @@ def show_photoalbum(request, id, album_id):
         )
 
     if request.user == owner:
-        photo_form = PhotoForm(request.POST or None, request.FILES or None)
+        PhotoFormset = modelformset_factory(Photo, form=PhotoForm)
+        photo_formset = PhotoFormset(request.POST or None, request.FILES or None)
         
-        if photo_form.is_valid():
-            photo = photo_form.save(commit=False)
-            photo.album = album
-            photo.user = owner
-            photo.save()
+        if photo_formset.is_valid():
+            for photo_form in photo_formset.forms:
+                photo = photo_form.save(commit=False)
+                photo.album = album
+                photo.user = owner
+                photo.save()
 
-        response.update({'photo_form': photo_form})
+        response.update({'photo_formset': photo_formset})
 
     return response
 

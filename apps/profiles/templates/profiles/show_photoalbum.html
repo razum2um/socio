@@ -6,8 +6,8 @@
 <script type='text/javascript'>
     $(document).ready(function() {
         $('#upload form p').css('display','inline').last().css('display','block');
-        $('#upload #id_description').parent().css('display','block').hide()
-            .after('<a href="#" class="commentToggle">Комментарий</a>');
+        $('#upload form :input[id$="-description"]').parent().css('display','block').hide()
+            .after('<a href="javascript:void(0);" class="commentToggle">Комментарий</a>');
             $('.commentToggle').click( function() {
                 if ($(this).hasClass('opened')) {
                     $(this).removeClass('opened').text('Комментарий').prev().hide();
@@ -33,7 +33,7 @@
                 <div class='info'>
                     <p>{{ photo.description }}</p>
                     {% if request.user == owner %}
-                        <a href='#'>Сделать обложкой</a>
+                        <a href='javascript:void(0);'>Сделать обложкой</a>
                     {% endif %}
                 </div>
                 {% empty %}
@@ -47,10 +47,15 @@
 
     {% if request.user == owner %}
     <div id='upload' style='clear:both'>
-    <p>Вы можете добавить фотографию</p>
+        <p>Вы можете добавить фотографию</p>
     <form action='.' method='POST' enctype="multipart/form-data">
-        {{ photo_form.as_p }}
-        {% csrf_token %}
+    {{ photo_formset.management_form }}
+    {% for photo_form in photo_formset.forms %}
+        <div class='photo'>
+            {{ photo_form.as_p }}
+            {% csrf_token %}
+        </div>
+    {% endfor %}
         <p><input type='submit' value='Добавить фото' /></p>
     </form>
     </div>
