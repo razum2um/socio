@@ -8,17 +8,20 @@ from django.template.loader import render_to_string
 from openteam.decorators import ajax_only, render_to
 from openteam.shortcuts import json_response
 
-from apps.profiles.forms import ProfileAttributeForm
-from apps.profiles.models.attributemodel import ProfileAttribute
-
-
-@ajax_only
-def get_gender_marial(request):
-    return json_response(dict())
+from profiles.forms import ProfileAttributeForm
+from profiles.models import ProfileAttribute, UserProfile
 
 @ajax_only
-def get_gender_orientation(request):
-    return json_response(dict())
+def gendered_marial(request, sex):
+    return json_response(dict(
+        marital_status = UserProfile.marial_declension(sex),
+        ))
+
+@ajax_only
+def gendered_orientation(request, sex):
+    return json_response(dict(
+        orientation = UserProfile.orientation_declension(sex),
+        ))
 
 @ajax_only
 @login_required

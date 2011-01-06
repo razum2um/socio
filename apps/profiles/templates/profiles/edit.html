@@ -2,6 +2,14 @@
 {% load helpers thumbnail %}
 {% block title %}Редактирование профиля {{ owner }}{% endblock %}
 {% block content %}
+<script type="text/javascript">
+    var Profile;
+    (function($){
+        Profile = {
+            
+        };
+    })(jQuery);
+</script>
 <h2>{{ owner.get_profile.name }}, редактирование профиля</h2>
 <form action="{% url edit_profile id=owner.id %}" method="POST" enctype="multipart/form-data" class="bp">
   {% csrf_token %}
@@ -18,7 +26,7 @@
   {% with profile_form as form %}
     {% include "form.html" %}
   {% endwith %}
-  <p class="actions">&larr;&nbsp;<a href="{% url profile id=owner.id %}">Назад</a>{% submit_tag 'сохранить' %}</p>
+  <p class="actions">&larr;&nbsp;<a href="{% url show_profile id=owner.id %}">Назад</a>{% submit_tag 'сохранить' %}</p>
 </form>
 {% endblock content %}
 

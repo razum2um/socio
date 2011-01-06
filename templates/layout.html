@@ -33,7 +33,7 @@
 
           <ul class="actions">
             {% if user.is_authenticated%}
-            <li><a href="{% url profile id=user.id %}">Профиль</a></li>
+            <li><a href="{% url show_profile id=user.id %}">Профиль</a></li>
             <li><a href="{% url sign_out %}">Выход</a></li>
             {% else %}
             <li><a href="{% url sign_in %}">Войти</a></li></li>
@@ -48,11 +48,11 @@
               <a href="{% url sign_out %}">Выйти</a>
               <div class="current-user">
               {% thumbnail user.get_profile.avatar "50x50" as avatar %}
-                <a href="{% url profile id=user.id %}"><img src="{{ avatar.url }}" /></a>
+                <a href="{% url show_profile id=user.id %}"><img src="{{ avatar.url }}" /></a>
               {% empty %}
                 <img src="{{ IMG_URL }}av_empty.png" alt="{{ owner.get_profile.name }}" width="48" height="48"/>
               {% endthumbnail %}
-                <a href="{% url profile id=user.id %}">{{ user.get_profile.name }}</a>
+                <a href="{% url show_profile id=user.id %}">{{ user.get_profile.name }}</a>
               </div>
               <div class="navigation">
                 <ul>

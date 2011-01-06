@@ -22,7 +22,7 @@
     {% if current_page.slug == 'dossier' %}
       Досье
     {% else %}
-      <a href="{% url profile id=owner.id %}">Досье</a>
+      <a href="{% url show_profile id=owner.id %}">Досье</a>
     {% endif %}
     {% if current_page.slug == 'photoalbums' %}
       Фотографии

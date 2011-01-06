@@ -46,7 +46,7 @@ def show_photoalbum(request, id, album_id):
     if request.user == owner:
         PhotoFormset = modelformset_factory(Photo, form=PhotoForm)
         photo_formset = PhotoFormset(request.POST or None, request.FILES or None)
-        
+
         if photo_formset.is_valid():
             for photo_form in photo_formset.forms:
                 photo = photo_form.save(commit=False)
@@ -63,10 +63,10 @@ def show_photoalbum(request, id, album_id):
 def add_photoalbum(request, id):
     owner = get_object_or_404(User, id=id)
     # take a look at http://djangosnippets.org/snippets/874/ plz
-    # ... user._meta.get_all_related_objects() ... 
+    # ... user._meta.get_all_related_objects() ...
     # too expensive for a deco to use with every user's staff?
     if request.user != owner:
-        return HttpResponseForbidden('Take care of *your* account, please') 
+        return HttpResponseForbidden('Take care of *your* account, please')
 
     album_form = PhotoAlbumForm(request.POST or None)
 
@@ -109,8 +109,8 @@ def edit(request, id):
         return redirect_to_view('index')
 
     profile = owner.get_profile()
-    user_form = UserForm(request.POST or None, instance=owner, prefix='user_')
-    profile_form = UserProfileForm(request.POST or None, request.FILES or None, instance=profile, prefix='profile_')
+    user_form = UserForm(request.POST or None, instance=owner, prefix='user')
+    profile_form = UserProfileForm(request.POST or None, request.FILES or None, instance=profile, prefix='profile')
 
     if user_form.is_valid() and profile_form.is_valid():
         user_form.save()

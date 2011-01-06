@@ -5,7 +5,8 @@ from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
 
-from helpers import O_CHOICES_M, MS_CHOICES_M, SEX_CHOICES, user_upload_to
+from helpers import SEX_CHOICES, S_MALE, S_FEMALE, MS_CHOICES_F, MS_CHOICES_M, O_CHOICES_M, \
+    O_CHOICES_F
 
 import json
 
@@ -21,6 +22,14 @@ class UserProfile (models.Model):
 
     def __unicode__(self):
         return self.name
+
+    @classmethod
+    def marial_declension (cls, sex):
+        return MS_CHOICES_F if sex == S_FEMALE else MS_CHOICES_M
+
+    @classmethod
+    def orientation_declension (cls, sex):
+        return O_CHOICES_F if sex == S_FEMALE else O_CHOICES_M
 
     @property
     def name(self):
@@ -41,7 +50,6 @@ def initialize_attributes_set(instance, **kwargs):
         with open(settings.PROFILE_INITIAL_ATTRIBUTES,'r') as fp:
             data = json.load(fp)
             for line in data:
-                print line
                 instance.attributes.create(
                         name       = line['name'],
                         empty_text = line['empty_text'],
@@ -49,3 +57,4 @@ def initialize_attributes_set(instance, **kwargs):
                         )
 
 models.signals.post_save.connect(initialize_attributes_set, UserProfile)
+

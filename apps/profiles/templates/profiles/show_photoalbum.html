@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% load thumbnail %}
+{% load thumbnail helpers %}
 
 {% block script %}
 {{ block.super }}
@@ -56,9 +56,10 @@
             {% csrf_token %}
         </div>
     {% endfor %}
-        <p><input type='submit' value='Добавить фото' /></p>
+        <p>{% submit_tag "Добавить фото" %}</p>
     </form>
     </div>
     {% endif %}
 </div>
 {% endblock content %}
+

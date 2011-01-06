@@ -22,7 +22,7 @@
     <div id="attr_{{ attr.id }}">
       <span class="name">{{ attr.name }}
           {% if user.id == owner.id %}
-              <a class="attr-edit-link" href="#" onclick="Profile.edit('{{ attr.id }}','{% url profile_attribute attr_id=attr.id %}'); return false;">edit</a>
+              <a class="attr-edit-link" href="#" onclick="Profile.edit('{{ attr.id }}','{% url aj_edit_attribute attr_id=attr.id %}'); return false;">edit</a>
           {% endif %}
       </span>
       {% if attr.value %}

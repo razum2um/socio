@@ -10,7 +10,7 @@ urlpatterns = patterns('profiles.views',
     url(
         regex = r'^(?P<id>\d+)/$',
         view  = 'profile.show',
-        name  = 'profile',
+        name  = 'show_profile',
     ),
     url(
         regex = r'^signup/$',
@@ -32,11 +32,6 @@ urlpatterns = patterns('profiles.views',
         view  = 'profile.photoalbums',
         name  = 'photoalbums',
     ),
-    url (
-        regex = r'^ajax/attribute/(?P<attr_id>\d+)/$',
-        view  = 'ajax.attribute',
-        name  = 'profile_attribute',
-    ),
     url(
         regex = r'^(?P<id>\d+)/photoalbums/add/$',
         view  = 'profile.add_photoalbum',
@@ -52,6 +47,24 @@ urlpatterns = patterns('profiles.views',
 #        view  = 'delete',
 #        name  = 'profiles_delete',
 #    ),
+)
+
+urlpatterns += patterns('profiles.views.ajax',
+    url (
+        regex = r'^ajax/attr/(?P<attr_id>\d+)/$',
+        view  = 'attribute',
+        name  = 'aj_edit_attribute',
+    ),
+    url (
+        regex = r'^ajax/marital/(?P<sex>\d+)/$',
+        view  = 'gendered_marial',
+        name  = 'aj_gendered_marial',
+    ),
+    url (
+        regex = r'^ajax/orientation/(?P<sex>\d+)/$',
+        view  = 'gendered_orientation',
+        name  = 'aj_gendered_orientation',
+    ),
 )
 
 urlpatterns += patterns('django.contrib.auth.views',

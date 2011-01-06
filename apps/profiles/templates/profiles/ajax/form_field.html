@@ -1,4 +1,4 @@
-<form action="{% url profile_attribute attr_id=attr_id %}" class="form">
+<form action="{% url aj_edit_attribute attr_id=attr_id %}" class="form">
 {% csrf_token %}
 <ul>
 {% for field in form %}
