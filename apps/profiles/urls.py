@@ -56,14 +56,9 @@ urlpatterns += patterns('profiles.views.ajax',
         name  = 'aj_edit_attribute',
     ),
     url (
-        regex = r'^ajax/marital/(?P<sex>\d+)/$',
-        view  = 'gendered_marial',
-        name  = 'aj_gendered_marial',
-    ),
-    url (
-        regex = r'^ajax/orientation/(?P<sex>\d+)/$',
-        view  = 'gendered_orientation',
-        name  = 'aj_gendered_orientation',
+        regex = r'^ajax/declension/$',
+        view  = 'declension',
+        name  = 'aj_declension',
     ),
 )
 

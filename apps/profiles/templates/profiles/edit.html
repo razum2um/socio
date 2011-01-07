@@ -1,32 +1,46 @@
 {% extends "layout.html" %}
 {% load helpers thumbnail %}
 {% block title %}Редактирование профиля {{ owner }}{% endblock %}
+{% block script %}
+    {{ block.super }}
+    <script type="text/javascript">
+        var Profile;
+        (function($){
+            Profile = {
+              declension: function(sex, type) {
+                var params = $.param({"sex": sex, "type": type});
+                $.getJSON('{% url aj_declension %}', params, function(data) {
+                    return data;
+                });
+              }
+            };
+            $('#id_profile-sex').live('change', function(){
+                var sex = $(this).attr('value')
+                var orientation = Profile.declension(sex, "orientation");
+                var marital = Profile.declension(sex, "marital");
+                console.log($("#id_profile-marital_status").);
+            });
+        })(jQuery);
+    </script>    
+{% endblock script %}
 {% block content %}
-<script type="text/javascript">
-    var Profile;
-    (function($){
-        Profile = {
-            
-        };
-    })(jQuery);
-</script>
-<h2>{{ owner.get_profile.name }}, редактирование профиля</h2>
-<form action="{% url edit_profile id=owner.id %}" method="POST" enctype="multipart/form-data" class="bp">
-  {% csrf_token %}
-  <p>
-    {% thumbnail owner.get_profile.avatar "100x100" as avatar %}
-      <img src="{{ avatar.url }}" alt="{{ owner.get_profile.name }}" class="avatar"/>
-    {% endthumbnail %}
-    {{ profile_form.errors }}
-    {{ user_form.errors }}
-  </p>
-  {% with user_form as form %}
-    {% include "form.html" %}
-  {% endwith %}
-  {% with profile_form as form %}
-    {% include "form.html" %}
-  {% endwith %}
-  <p class="actions">&larr;&nbsp;<a href="{% url show_profile id=owner.id %}">Назад</a>{% submit_tag 'сохранить' %}</p>
-</form>
+    <h2>{{ owner.get_profile.name }}, редактирование профиля</h2>
+    <form action="{% url edit_profile id=owner.id %}" method="POST" enctype="multipart/form-data" class="bp">
+      {% csrf_token %}
+      <p>
+        {% thumbnail owner.get_profile.avatar "100x100" as avatar %}
+          <img src="{{ avatar.url }}" alt="{{ owner.get_profile.name }}" class="avatar"/>
+        {% endthumbnail %}
+        {{ profile_form.errors }}
+        {{ user_form.errors }}
+      </p>
+      {% with user_form as form %}
+        {% include "form.html" %}
+      {% endwith %}
+      {% with profile_form as form %}
+        {% include "form.html" %}
+      {% endwith %}
+      <p class="actions">&larr;&nbsp;<a href="{% url show_profile id=owner.id %}">Назад</a>{% submit_tag 'сохранить' %}</p>
+    </form>
 {% endblock content %}
 

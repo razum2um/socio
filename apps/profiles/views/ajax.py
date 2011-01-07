@@ -5,22 +5,22 @@ from django.shortcuts import get_object_or_404
 from django.template.context import RequestContext
 from django.template.loader import render_to_string
 
-from openteam.decorators import ajax_only, render_to
+from openteam.decorators import ajax_only
 from openteam.shortcuts import json_response
 
-from profiles.forms import ProfileAttributeForm
-from profiles.models import ProfileAttribute, UserProfile
+from apps.profiles.forms import ProfileAttributeForm
+from apps.profiles.models import ProfileAttribute, UserProfile, S_MALE, S_FEMALE
 
 @ajax_only
-def gendered_marial(request, sex):
+def declension(request):
+    declensions = {
+        'marital': UserProfile.marial_declension,
+        'orientation': UserProfile.orientation_declension,
+    }
+    sex = request.GET.get('sex', S_MALE)
+    declension_type = request.GET.get('type')
     return json_response(dict(
-        marital_status = UserProfile.marial_declension(sex),
-        ))
-
-@ajax_only
-def gendered_orientation(request, sex):
-    return json_response(dict(
-        orientation = UserProfile.orientation_declension(sex),
+        declension = declensions[declension_type](int(sex)),
         ))
 
 @ajax_only
