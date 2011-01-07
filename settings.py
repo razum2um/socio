@@ -76,6 +76,7 @@ LOGIN_URL = '/profiles/signin/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_URL = '/profiles/signout/'
 
+LIMIT_PHOTOALBUMS = 0 # 0 - infinite
 
 try:
     from local_settings import *

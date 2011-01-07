@@ -44,8 +44,14 @@ def show_photoalbum(request, id, album_id):
         )
 
     if request.user == owner:
-        PhotoFormset = modelformset_factory(Photo, form=PhotoForm)
-        photo_formset = PhotoFormset(request.POST or None, request.FILES or None)
+        PhotoFormset = modelformset_factory(Photo, form=PhotoForm, extra=2)
+        config = {
+            'form-TOTAL_FORMS': u'1',
+            'form-INITIAL_FORMS': u'0',
+            'form-MAX_NUM_FORMS': u'',
+        }
+
+        photo_formset = PhotoFormset(request.POST or config, request.FILES or config)
         
         if photo_formset.is_valid():
             for photo_form in photo_formset.forms:
