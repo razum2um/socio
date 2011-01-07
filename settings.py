@@ -72,9 +72,9 @@ INSTALLED_APPS = (
 )
 
 AUTH_PROFILE_MODULE = 'profiles.UserProfile'
-LOGIN_URL = '/profiles/signin/'
+LOGIN_URL = '/profiles/sign_in/'
 LOGIN_REDIRECT_URL = '/'
-LOGOUT_URL = '/profiles/signout/'
+LOGOUT_URL = '/profiles/sign_out/'
 
 LIMIT_PHOTOALBUMS = 0 # 0 - infinite
 

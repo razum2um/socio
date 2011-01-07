@@ -77,7 +77,7 @@ def add(request, id):
         album.user = owner
         album.save()
 
-        return redirect_to_view('show', id=owner.id, album_id=album.id)
+        return redirect_to_view('show_photoalbum', id=owner.id, album_id=album.id)
 
     return dict(
         owner = owner,
