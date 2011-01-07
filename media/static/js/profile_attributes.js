@@ -32,6 +32,16 @@ var Profile;
             $('#attr_'+id+' .form').remove();
             $('a.attr-edit-link').css('display','');
             $('#attr_'+id+'>p.text').css('display','');
+        },
+
+        declension: function(url, sex, type, id2change) {
+            $.getJSON(url, $.param({"sex": sex, "type": type}), function(data, textStatus) {
+                if (textStatus == 'success') {
+                    $(id2change + ' option').each(function(i){
+                        $(this).text(data.declension[i][1]);
+                    });
+                }
+            });
         }
 
     };

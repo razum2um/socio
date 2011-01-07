@@ -3,25 +3,16 @@
 {% block title %}Редактирование профиля {{ owner }}{% endblock %}
 {% block script %}
     {{ block.super }}
+    <script type="text/javascript" src="{{ JS_URL }}profile_attributes.js"></script>
     <script type="text/javascript">
-        var Profile;
         (function($){
-            Profile = {
-              declension: function(sex, type) {
-                var params = $.param({"sex": sex, "type": type});
-                $.getJSON('{% url aj_declension %}', params, function(data) {
-                    return data;
-                });
-              }
-            };
             $('#id_profile-sex').live('change', function(){
-                var sex = $(this).attr('value')
-                var orientation = Profile.declension(sex, "orientation");
-                var marital = Profile.declension(sex, "marital");
-                console.log($("#id_profile-marital_status").options);
+                var sex = $(this).attr('value');
+                Profile.declension('{% url aj_declension %}',sex, "orientation", '#id_profile-orientation');
+                Profile.declension('{% url aj_declension %}',sex, "marital", '#id_profile-marital_status');
             });
         })(jQuery);
-    </script>    
+    </script>
 {% endblock script %}
 {% block content %}
     <h2>{{ owner.get_profile.name }}, редактирование профиля</h2>
@@ -43,4 +34,5 @@
       <p class="actions">&larr;&nbsp;<a href="{% url show_profile id=owner.id %}">Назад</a>{% submit_tag 'сохранить' %}</p>
     </form>
 {% endblock content %}
+
 
