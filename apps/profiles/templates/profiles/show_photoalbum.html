@@ -4,17 +4,45 @@
 {% block script %}
 {{ block.super }}
 <script type='text/javascript'>
+    function cloneMore(selector, type) {
+        var newElement = $(selector).clone(true);
+        var total = $('#id_' + type + '-TOTAL_FORMS').val();
+        newElement.find(':input').each(function() {
+            var name = $(this).attr('name').replace('-' + (total-1) + '-','-' + total + '-');
+            var id = 'id_' + name;
+            $(this).attr({'name': name, 'id': id}).val('').removeAttr('checked');
+        });
+        newElement.find('label').each(function() {
+            var newFor = $(this).attr('for').replace('-' + (total-1) + '-','-' + total + '-');
+            $(this).attr('for', newFor);
+        });
+        total++;
+        $('#id_' + type + '-TOTAL_FORMS').val(total);
+        $(selector).after(newElement);
+    }
+
     $(document).ready(function() {
         $('#upload form p').css('display','inline').last().css('display','block');
         $('#upload form :input[id$="-description"]').parent().css('display','block').hide()
-            .after('<a href="javascript:void(0);" class="commentToggle">Комментарий</a>');
-            $('.commentToggle').click( function() {
-                if ($(this).hasClass('opened')) {
-                    $(this).removeClass('opened').text('Комментарий').prev().hide();
-                } else {
-                    $(this).addClass('opened').text('Скрыть').prev().show();
-                }
-                })
+            .after('<a href="javascript:void(0);" class="commentToggle">Комментарий</a>&nbsp;' + 
+                '<a href="javascript:void(0);" class="uploadMore">Добавить еще</a>');
+
+        $('.commentToggle').click( function() {
+            if ($(this).hasClass('opened')) {
+                $(this).removeClass('opened').text('Комментарий').prev().hide();
+            } else {
+                $(this).addClass('opened').text('Скрыть').prev().show();
+            }
+            });
+
+        $('.uploadMore').click( function() {
+            cloneMore('#upload .photo:last', '{{ photo_formset.prefix }}');
+            });
+
+        $('#upload :checkbox[name$="-is_cover"]').change( function() {
+            $('#upload :checkbox[name$="-is_cover"]').attr('checked', false);
+            $(this).attr('checked', true);
+            });
         });
 </script>
 {% endblock script %}

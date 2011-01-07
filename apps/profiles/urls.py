@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls.defaults import patterns, url, include
 
-urlpatterns = patterns('profiles.views',
+urlpatterns = patterns('profiles.views.profile',
 #    url(
 #        regex = r'^$',
 #        view  = 'index',
@@ -9,44 +9,45 @@ urlpatterns = patterns('profiles.views',
 #    ),
     url(
         regex = r'^(?P<id>\d+)/$',
-        view  = 'profile.show',
+        view  = 'show',
         name  = 'show_profile',
     ),
     url(
-        regex = r'^signup/$',
-        view  = 'auth.sign_up',
+        regex = r'^(?P<id>\d+)/edit/$',
+        view  = 'edit',
+        name  = 'edit_profile',
+    ),
+)
+
+urlpatterns += patterns('profiles.views.auth',
+    url(
+        regex = r'^sign_up/$',
+        view  = 'sign_up',
         name  = 'sign_up',
     ),
     url(
-        regex = r'^signout/$',
-        view  = 'auth.sign_out',
+        regex = r'^sign_out/$',
+        view  = 'sign_out',
         name  = 'sign_out',
     ),
-    url(
-        regex = r'^(?P<id>\d+)/edit/$',
-        view  = 'profile.edit',
-        name  = 'edit_profile',
-    ),
+)
+
+urlpatterns += patterns('profiles.views.photoalbum',
     url (
         regex = r'^(?P<id>\d+)/photoalbums/$',
-        view  = 'profile.photoalbums',
+        view  = 'index',
         name  = 'photoalbums',
-    ),
-    url(
-        regex = r'^(?P<id>\d+)/photoalbums/add/$',
-        view  = 'profile.add_photoalbum',
-        name  = 'add_photoalbum',
     ),
     url (
         regex = r'^(?P<id>\d+)/photoalbums/(?P<album_id>\d+)/$',
-        view  = 'profile.show_photoalbum',
+        view  = 'show',
         name  = 'show_photoalbum',
-    )
-#    url(
-#        regex = r'^(?P<id>\d+)/delete/$',
-#        view  = 'delete',
-#        name  = 'profiles_delete',
-#    ),
+    ),
+    url(
+        regex = r'^(?P<id>\d+)/photoalbums/add/$',
+        view  = 'add',
+        name  = 'add_photoalbum',
+    ),
 )
 
 urlpatterns += patterns('profiles.views.ajax',
@@ -64,7 +65,7 @@ urlpatterns += patterns('profiles.views.ajax',
 
 urlpatterns += patterns('django.contrib.auth.views',
     url(
-        regex  = r'^signin/$',
+        regex  = r'^sign_in/$',
         view   = 'login',
         name   = 'sign_in',
         kwargs ={'template_name': 'profiles/sign_in.html' }
