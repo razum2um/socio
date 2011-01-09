@@ -78,10 +78,10 @@
         <p>Вы можете добавить фотографию</p>
     <form action='.' method='POST' enctype="multipart/form-data">
     {{ photo_formset.management_form }}
+    {% csrf_token %}
     {% for photo_form in photo_formset.forms %}
         <div class='photo'>
             {{ photo_form.as_p }}
-            {% csrf_token %}
         </div>
     {% endfor %}
         <p>{% submit_tag "Добавить фото" %}</p>
