@@ -48,15 +48,17 @@ def show(request, id, album_id):
         }
 
         photo_formset = PhotoFormset(request.POST or config, request.FILES or config)
+        response.update({'photo_formset': photo_formset})
 
-        if photo_formset.is_valid():
+        if request.POST and photo_formset.is_valid():
             for photo_form in photo_formset.forms:
                 photo = photo_form.save(commit=False)
                 photo.album = album
                 photo.user = owner
                 photo.save()
-
-        response.update({'photo_formset': photo_formset})
+            # prevent douple-post of the same data
+            # maybe need def redirect_back() or smth of the kind
+            return redirect_to_view('show_photoalbum', id=owner.id, album_id=album.id)
 
     return response
 
