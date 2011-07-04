@@ -4,3 +4,4 @@ p. Created for fun and proovement that frameworks and agile is nifty way of deve
 
 p. All requirements listed under the @packages.list@, so just run @pip install -r packages.list@ under the virtualenv to get application workaround.
 
+p. Initiated by nimnull at github.com
